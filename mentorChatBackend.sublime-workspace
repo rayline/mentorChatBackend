@@ -1,0 +1,1126 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pri",
+				"priority_queue"
+			],
+			[
+				"no",
+				"noSonCnt"
+			],
+			[
+				"max",
+				"maxCnt"
+			],
+			[
+				"ma",
+				"maxCnt"
+			],
+			[
+				"co",
+				"complete"
+			],
+			[
+				"f",
+				"fail"
+			],
+			[
+				"Bi",
+				"BigInteger"
+			],
+			[
+				"be",
+				"best"
+			],
+			[
+				"bes",
+				"bestLen"
+			],
+			[
+				"In",
+				"InPostCreateTree"
+			],
+			[
+				"le",
+				"left"
+			],
+			[
+				"prin",
+				"printInorder"
+			],
+			[
+				"pr",
+				"printf	printf …"
+			],
+			[
+				"p",
+				"printInorder"
+			],
+			[
+				"deep",
+				"deepRevCopy"
+			],
+			[
+				"as",
+				"ansb"
+			],
+			[
+				"Regi",
+				"RegisterDataBase	error ƒ"
+			],
+			[
+				"R",
+				"RegisterModel	 ƒ"
+			],
+			[
+				"i",
+				"init	func init() ʂ"
+			],
+			[
+				"con",
+				"Controller	struct ʈ"
+			],
+			[
+				"S",
+				"RunSyncdb	error ƒ"
+			],
+			[
+				"t",
+				"TplName	string ν"
+			],
+			[
+				"te",
+				"TplName	string ν"
+			],
+			[
+				"Con",
+				"Controller	struct ʈ"
+			],
+			[
+				"New",
+				"NewOrm	orm.Ormer ƒ"
+			],
+			[
+				"im",
+				"import	import (...) ʂ"
+			],
+			[
+				"Reg",
+				"RegisterDataBase	error ƒ"
+			],
+			[
+				"Tp",
+				"TplName	string ν"
+			],
+			[
+				"Re",
+				"RegisterDriver	error ƒ"
+			],
+			[
+				"pa",
+				"ParseForm	error ƒ"
+			],
+			[
+				"l",
+				"LoginController	struct ʈ"
+			],
+			[
+				"a",
+				"a"
+			],
+			[
+				"b",
+				"bracketCnt"
+			],
+			[
+				"c",
+				"command"
+			],
+			[
+				"ra",
+				"rawb"
+			],
+			[
+				"D",
+				"DumpResponse	dump []byte, err error ƒ"
+			],
+			[
+				"P",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"team",
+				"teamQ"
+			],
+			[
+				"tea",
+				"teamQ"
+			],
+			[
+				"rea",
+				"reached"
+			],
+			[
+				"re",
+				"reached"
+			],
+			[
+				"Set",
+				"SetString	*big.Int, bool ƒ"
+			],
+			[
+				"ran",
+				"randomString	string ƒ"
+			],
+			[
+				"rand",
+				"rand	 package ρ"
+			],
+			[
+				"op",
+				"operation"
+			],
+			[
+				"n",
+				"n"
+			],
+			[
+				"num",
+				"numOfZero"
+			],
+			[
+				"expre",
+				"expressionToParse"
+			],
+			[
+				"ex",
+				"expressionToParse"
+			],
+			[
+				"fo",
+				"for	For Loop"
+			],
+			[
+				"pu",
+				"push_back"
+			],
+			[
+				"del",
+				"delNext"
+			],
+			[
+				"pool",
+				"poolq"
+			],
+			[
+				"r",
+				"rson"
+			],
+			[
+				"cl",
+				"clearList"
+			],
+			[
+				"li",
+				"listNode"
+			],
+			[
+				"now",
+				"nowa"
+			],
+			[
+				"list",
+				"listNode"
+			],
+			[
+				"mem",
+				"memSize"
+			],
+			[
+				"get",
+				"getNextKth"
+			],
+			[
+				"lsi",
+				"listCnt"
+			],
+			[
+				"data",
+				"data_T"
+			],
+			[
+				"res",
+				"respDump	[]byte ν"
+			],
+			[
+				"http",
+				"httputil	 package ρ"
+			],
+			[
+				"resp",
+				"respForm	processForm_t ν"
+			],
+			[
+				"for",
+				"forv	Vector For Loop"
+			],
+			[
+				"pro",
+				"processData	string ν"
+			],
+			[
+				"N",
+				"NewBufferString	*bytes.Buffer ƒ"
+			],
+			[
+				"stu",
+				"student	studentInfo_t ν"
+			],
+			[
+				"stud",
+				"studentMutex	sync.RWMutex ν"
+			],
+			[
+				"sta",
+				"StatusOK	 Ɩ"
+			],
+			[
+				"Print",
+				"Println	 ƒ"
+			],
+			[
+				"Status",
+				"StatusGone	 Ɩ"
+			],
+			[
+				"W",
+				"WriteHeader	 ƒ"
+			],
+			[
+				"file",
+				"fileBuffer	bytes.Buffer ν"
+			],
+			[
+				"Read",
+				"ReadBytes	line []byte, err error ƒ"
+			],
+			[
+				"F",
+				"Fprint	n int, err error ƒ"
+			],
+			[
+				"Ne",
+				"NewBuffer	*bytes.Buffer ƒ"
+			],
+			[
+				"Dum",
+				"DumpRequestOut	[]byte, error ƒ"
+			],
+			[
+				"stat",
+				"StatusCode	int ν"
+			],
+			[
+				"Par",
+				"ParseMultipartForm	error ƒ"
+			],
+			[
+				"mul",
+				"ParseMultipartForm	error ƒ"
+			],
+			[
+				"O",
+				"Output	error ƒ"
+			],
+			[
+				"sess",
+				"session	sessionInfo_t ν"
+			],
+			[
+				"pRIN",
+				"Println	 ƒ"
+			],
+			[
+				"mi",
+				"Millisecond	 Ɩ"
+			],
+			[
+				"statusbad",
+				"StatusBadRequest	 Ɩ"
+			],
+			[
+				"ses",
+				"sessionID	uint64 ν"
+			],
+			[
+				"session",
+				"sessionMutex	sync.RWMutex ν"
+			],
+			[
+				"Ran",
+				"randomKey	string ν"
+			],
+			[
+				"port",
+				"listenPort	 Ɩ"
+			],
+			[
+				"I",
+				"Int31n	int32 ƒ"
+			],
+			[
+				"w",
+				"WriteHeader	 ƒ"
+			],
+			[
+				"student",
+				"studentInfo_t	struct ʈ"
+			],
+			[
+				"Prin",
+				"Println	 ƒ"
+			],
+			[
+				"StatusT",
+				"StatusRequestTimeout	 Ɩ"
+			],
+			[
+				"che",
+				"cheatLogger	*log.Logger ν"
+			],
+			[
+				"time",
+				"timeLimit	 Ɩ"
+			],
+			[
+				"No",
+				"Now	time.Time ƒ"
+			],
+			[
+				"legal",
+				"legalTime	bool ƒ"
+			],
+			[
+				"ht",
+				"http	 package ρ"
+			],
+			[
+				"ala",
+				"alarmClientFailure	 ƒ"
+			],
+			[
+				"al",
+				"alarmClientFailure	 ƒ"
+			],
+			[
+				"Fo",
+				"PostForm	url.Values ν"
+			],
+			[
+				"stude",
+				"students	map[uint64]studentInfo_t ν"
+			],
+			[
+				"At",
+				"After	*goquery.Selection ƒ"
+			],
+			[
+				"C",
+				"Children	*goquery.Selection ƒ"
+			],
+			[
+				"Find",
+				"Find	*goquery.Selection ƒ"
+			],
+			[
+				"mu",
+				"mux	*http.ServeMux ν"
+			],
+			[
+				"Fs",
+				"Fscanf	n int, err error ƒ"
+			],
+			[
+				"H",
+				"Html	ret string, e error ƒ"
+			],
+			[
+				"Sc",
+				"Scan	n int, err error ƒ"
+			],
+			[
+				"ReadS",
+				"ReadString	line string, err error ƒ"
+			],
+			[
+				"Scan",
+				"Scanln	n int, err error ƒ"
+			],
+			[
+				"StatusBad",
+				"StatusBadRequest	 Ɩ"
+			],
+			[
+				"LS",
+				"LstdFlags	 Ɩ"
+			],
+			[
+				"Open",
+				"OpenFile	*os.File, error ƒ"
+			],
+			[
+				"Not",
+				"ErrNotExist	error ν"
+			],
+			[
+				"Se",
+				"ListenAndServe	error ƒ"
+			],
+			[
+				"Defa",
+				"DefaultServeMux	*http.ServeMux ν"
+			],
+			[
+				"studen",
+				"studentID	uint64 ν"
+			],
+			[
+				"Cle",
+				"Client	struct ʈ"
+			],
+			[
+				"E",
+				"EncodeToString	string ƒ"
+			],
+			[
+				"ord",
+				"orders	[]string ν"
+			],
+			[
+				"or",
+				"orders	[]string ν"
+			],
+			[
+				"key",
+				"keyHash	[32]byte ν"
+			],
+			[
+				"De",
+				"DecodeString	[]byte, error ƒ"
+			],
+			[
+				"Pri",
+				"Println	n int, err error ƒ"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					"Clean up Files"
+				]
+			],
+			[
+				"Packages/LaTeXing/LaTeX.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 784.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control:",
+				"Package Control: Discover Packages"
+			],
+			[
+				"markd",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"pan",
+				"Pandoc"
+			],
+			[
+				"mar",
+				"Markmon launch"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"mark",
+				"Markmon launch"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 832.0
+	},
+	"console":
+	{
+		"height": 246.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend"
+	],
+	"file_history":
+	[
+		"/C/Users/rayline/OneDrive/document/code/buaa76/f.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa76/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa76/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa76/e.cpp",
+		"/C/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/ext/pb_ds/priority_queue.hpp",
+		"/I/O/White Album 2/mv000.pak",
+		"/I/O/White Album 2/VOICE.PAK",
+		"/C/Users/rayline/OneDrive/document/code/buaa76/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/bdStarQ/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa75/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/bdStarQ/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/bdStarQ/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa76/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa75/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa75/g.cpp",
+		"/C/Users/rayline/OneDrive/document/code/mentorChat/backEnd/restDoc.md",
+		"/C/Users/rayline/OneDrive/document/code/buaa75/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa75/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/bdStarQ/d.cpp",
+		"/C/Games/World_of_Tanks/res_mods/0.9.14.1/text/settings.xml",
+		"/C/Users/rayline/OneDrive/document/code/buaa69/b.cpp",
+		"/C/Users/rayline/AppData/Roaming/Sublime Text 3/Packages/GoSublime/CHANGELOG.md",
+		"/C/Users/rayline/OneDrive/document/code/mentorChat/frontEnd/remote.md",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/c.out",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/C-small-attempt0.in",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/b.out",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/B-small-attempt1.in",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/A-small-attempt0.in",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/a.out",
+		"/I/U/Haiyore! Nyaruko-san/[樱律字幕组][潜行吧！奈亚子W][第01话][中日双语内挂字幕][720P][MKV]_Track3.ass",
+		"/C/Users/rayline/OneDrive/document/code/gcj1B/B-small-attempt0.in",
+		"/C/Users/rayline/OneDrive/document/code/buaa69/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa69/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa69/e.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa69/f.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa69/b.out",
+		"/C/Users/rayline/OneDrive/document/code/buaa69/out.txt",
+		"/C/Users/rayline/OneDrive/document/code/buaa69/in.txt",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/views/index.tpl",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/views/register.tpl",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/main.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/routers/router.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/controllers/RegisterController/RegisterController.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/controllers/ArgumentController/ArgumentController.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/models/arguments/arguments.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/models/ormInit.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/conf/app.conf",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/models/accounts/accounts.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/controllers/default.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/controllers/LoginController/loginController.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/controllers/IndexController/IndexController.go",
+		"/C/Users/rayline/AppData/Roaming/Sublime Text 3/Packages/GoSublime/GoSublime.sublime-settings",
+		"/C/Users/rayline/OneDrive/document/code/strange/a.cpp",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/objects.md",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/models/models.go",
+		"/C/Users/rayline/OneDrive/document/go/src/stageD/views/tpltest.go",
+		"/C/Users/rayline/OneDrive/document/code/buaa63/f.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa63/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa63/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa63/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa63/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa63/e.cpp",
+		"/C/Users/rayline/OneDrive/document/code/kmp/kmp.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa63/1.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj1A/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj1A/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj1A/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa62/g.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj1A/b.out",
+		"/C/Users/rayline/OneDrive/document/code/gcj1A/B-small-attempt0.in",
+		"/C/Users/rayline/OneDrive/document/code/gcj1A/a.out",
+		"/C/Users/rayline/OneDrive/document/code/buaa61/g.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa62/e.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa62/f.cpp",
+		"/C/Users/rayline/OneDrive/document/code/dayetest/1.go",
+		"/C/Users/rayline/OneDrive/document/code/buaa62/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa62/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa62/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa62/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa61/g.out",
+		"/C/Users/rayline/OneDrive/document/code/buaa62/1.out",
+		"/C/Users/rayline/OneDrive/document/code/buaa61/out2.txt",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/e.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/f.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/g.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/h.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/i.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/j.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/k.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/l.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/d.out",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/a.go",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/a.out",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/A-large.in",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/b.out",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/c.go",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/c.out",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/ds.cpp",
+		"/C/Users/rayline/OneDrive/document/code/gcj Q/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa210/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa61/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa61/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa61/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa61/e.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa61/f.cpp",
+		"/C/Users/rayline/OneDrive/document/code/goPrac/speedtest.go",
+		"/C/Users/rayline/OneDrive/document/code/buaa209/a.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa209/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa209/e.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa209/g.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa209/h.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa209/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa209/f.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa208/h.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa208/i.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa208/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa51/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa208/e.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa208/d.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa208/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa208/in1.txt"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 176.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"*",
+			"MainController",
+			"maxx",
+			"enrolled",
+			"header",
+			"readPhrases",
+			"serveRec",
+			"c",
+			"checkEnroll",
+			"phrases",
+			"keywords",
+			"checkEnroll",
+			"main",
+			"false",
+			"enrolled",
+			"respData",
+			"json",
+			"fw",
+			"fileData",
+			"serveEnroll",
+			"newWavHeader",
+			"serveEnroll",
+			"failed to create enrollment",
+			"httputil",
+			"record",
+			"enroll",
+			"request.Body",
+			"sessionid",
+			"Guide",
+			"serveEnroll",
+			"POST",
+			"MSLogger",
+			"MSLoggere",
+			"serveRec",
+			"serveCon",
+			"MSLogger",
+			"serveCon",
+			"creatloggers",
+			"logger",
+			"Log",
+			"logger",
+			"http.StatusForbidden",
+			"serveLogin",
+			"http.statusForbidden",
+			"readName",
+			"serveCon",
+			"console",
+			"legalIP",
+			"IP",
+			"clientLegal",
+			"client",
+			"secure",
+			"reqGuide",
+			"15:03",
+			"15:04",
+			"serveInfo",
+			"info",
+			"coreLogger",
+			"creatLoggers",
+			"{\n",
+			"phrases",
+			"recoverRecord",
+			"unmarshal",
+			"readConfig",
+			"{\n",
+			"w.Write(",
+			"bindLogger",
+			"lessonInfo",
+			"LessionInfo",
+			"0d0d0d0d0a",
+			"0d0a",
+			" ",
+			"login",
+			"err",
+			"url",
+			"userINfo",
+			"base64",
+			"%d",
+			"int",
+			"double",
+			"int",
+			"q",
+			"1000000",
+			"<tr><td>",
+			"bottom",
+			"build",
+			"bit",
+			"10000000",
+			"bits",
+			"depth",
+			"|",
+			"||",
+			"-",
+			"+",
+			"comment",
+			"size",
+			"apply",
+			"hint",
+			"search",
+			"login",
+			"add_small",
+			"detailBox",
+			"column",
+			"f :=",
+			"\\n5743252515",
+			"5743252515",
+			"showDetail",
+			"show",
+			"showd",
+			"showde",
+			"showdetail",
+			"fmt.println(bs",
+			"resp, err",
+			"resp, _ := client.Do(req)",
+			"resp, err := client.Do(req)",
+			" a",
+			"b.Reset()",
+			"resp.Write",
+			"ItoA(",
+			"int",
+			" int",
+			"int64",
+			"err",
+			"post_data",
+			"right",
+			"</p>",
+			"<p>",
+			"orange"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 44.0
+	},
+	"input":
+	{
+		"height": 60.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\CF611":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\buaa69":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\dayetest":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\easy_connect":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\gcj Q":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\kmp":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\servercore":
+	{
+		"height": 215.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\sinaWeb":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\sinaWeb\\2":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\solution_maker":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\vedfolnir_server":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\vedfolnir_server\\BUAALogin":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\vedfolnir_server\\data":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\controllers":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\controllers\\IndexController":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\controllers\\LoginController":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\controllers\\RegisterController":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\models":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\models\\accounts":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\models\\arguments":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\routers":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD\\views":
+	{
+		"height": 228.0
+	},
+	"output.GoSublime-main-output":
+	{
+		"height": 228.0
+	},
+	"output.exec":
+	{
+		"height": 197.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.test_runner":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/C++/C++ Single File.sublime-build",
+	"project": "mentorChatBackend.sublime-project",
+	"replace":
+	{
+		"height": 84.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\rayline\\OneDrive\\document\\code\\buaa12\\g\\g.cpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 1000.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\rayline\\OneDrive\\document\\code\\buaa49\\project.sublime-project"
+			]
+		],
+		"width": 760.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 300.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
