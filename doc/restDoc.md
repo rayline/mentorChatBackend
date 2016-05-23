@@ -98,5 +98,5 @@ BLOCK means that the api may not return immediately, specially used for blocking
 
 ##constant table
 
-	int MESSAGE_BLOCKING_LIMIT = 15;
+	int MESSAGE_BLOCKING_LIMIT = 30;
 	int EMPTY_USER_LIFE = 3600;

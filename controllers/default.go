@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+	"mentorChatBackend/models/types"
 )
 
 type MainController struct {

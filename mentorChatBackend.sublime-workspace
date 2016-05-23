@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"typ",
+				"types	 package ρ"
+			],
+			[
+				"fu",
+				"func (*User)	func (...) {...} ʂ"
+			],
+			[
+				"func",
+				"func (*FileController)	func (...) {...} ʂ"
+			],
+			[
+				"f",
+				"func (*FileController)	func (...) {...} ʂ"
+			],
+			[
+				"F",
+				"func (*UserController)	func (...) {...} ʂ"
+			],
+			[
+				"R",
+				"Router	*beego.App ƒ"
+			],
+			[
 				"pri",
 				"priority_queue"
 			],
@@ -22,10 +46,6 @@
 			[
 				"co",
 				"complete"
-			],
-			[
-				"f",
-				"fail"
 			],
 			[
 				"Bi",
@@ -70,10 +90,6 @@
 			[
 				"Regi",
 				"RegisterDataBase	error ƒ"
-			],
-			[
-				"R",
-				"RegisterModel	 ƒ"
 			],
 			[
 				"i",
@@ -308,10 +324,6 @@
 				"ReadBytes	line []byte, err error ƒ"
 			],
 			[
-				"F",
-				"Fprint	n int, err error ƒ"
-			],
-			[
 				"Ne",
 				"NewBuffer	*bytes.Buffer ƒ"
 			],
@@ -502,18 +514,6 @@
 			[
 				"or",
 				"orders	[]string ν"
-			],
-			[
-				"key",
-				"keyHash	[32]byte ν"
-			],
-			[
-				"De",
-				"DecodeString	[]byte, error ƒ"
-			],
-			[
-				"Pri",
-				"Println	n int, err error ƒ"
 			]
 		]
 	},
@@ -629,10 +629,27 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend"
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/controllers",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/doc",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/tokens",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/types",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/users"
 	],
 	"file_history":
 	[
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/doc/restDoc.md",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/users/users.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/users/user.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/types/types.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/routers/router.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/controllers/default.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/controllers/filecontroller.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/controllers/usercontroller.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/tokens/token/token.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/tokens/tokens.go",
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/users/user/user.go",
 		"/C/Users/rayline/OneDrive/document/code/buaa76/f.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa76/b.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa76/d.cpp",
@@ -749,18 +766,7 @@
 		"/C/Users/rayline/OneDrive/document/code/buaa209/a.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa209/d.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa209/e.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa209/g.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa209/h.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa209/b.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa209/f.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa208/h.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa208/i.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa208/b.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa51/b.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa208/e.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa208/d.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa208/c.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa208/in1.txt"
+		"/C/Users/rayline/OneDrive/document/code/buaa209/g.cpp"
 	],
 	"find":
 	{
@@ -1012,6 +1018,14 @@
 	{
 		"height": 228.0
 	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\mentorChatBackend\\models\\types":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\mentorChatBackend\\models\\users":
+	{
+		"height": 228.0
+	},
 	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\go\\src\\stageD":
 	{
 		"height": 228.0
@@ -1068,7 +1082,7 @@
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "Packages/C++/C++ Single File.sublime-build",
+	"pinned_build_system": "Packages/GoSublime/GoSublime.sublime-build",
 	"project": "mentorChatBackend.sublime-project",
 	"replace":
 	{
