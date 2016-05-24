@@ -8,6 +8,7 @@ import "encoding/json"
 import "time"
 import "sync"
 import "fmt"
+import "strconv"
 
 type User struct {
 	Id                      types.UserID_t
@@ -78,10 +79,6 @@ func (u *User) AcceptAsFriend(Id types.UserID_t) {
 	if err != nil {
 		beego.BeeLogger.Error("%v\n", err)
 	}
-	_, err = conn.Do("SADD", Id, u.Id)
-	if err != nil {
-		beego.BeeLogger.Error("%v\n", err)
-	}
 }
 
 func (u *User) DeleteFriend(Id types.UserID_t) {
@@ -146,6 +143,8 @@ func (u *User) SendFriendRequest(Id types.UserID_t, message string) error {
 			Content: message,
 			Type:    FriendRequest,
 		})
+		//because it is really complicated, we now take the friend system that one will acknowledge the requestee as friend as soon as he sends the request. One can clear the relationship easily by deleting friend though not really friends.
+		u.AcceptAsFriend(Id)
 		return nil
 	} else {
 		return ErrAccessDenied
@@ -190,9 +189,27 @@ func (u *User) GetMESSAGE() *types.Message_t {
 			return nil
 		}
 		return &MESSAGE
+	} else {
+		beego.BeeLogger.Error("Failed to retrieve message : %v\n", err)
+		return nil
 	}
 }
 
 func (u *User) GetFriendList() []types.UserID_t {
-
+	conn := pool2.Get()
+	defer conn.Close()
+	Idstrings, err := redis.Strings(conn.Do("SMEMBERS", u.Id))
+	if err != nil {
+		beego.BeeLogger.Error("%v\n", err)
+		return nil
+	}
+	uList := []types.UserID_t{}
+	for _, v := range Idstrings {
+		Id, err := strconv.ParseUint(v, 10, 64)
+		if err != nil {
+			continue
+		}
+		uList = append(uList, types.UserID_t(Id))
+	}
+	return uList
 }

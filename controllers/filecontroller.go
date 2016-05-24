@@ -2,10 +2,10 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+	"io/ioutil"
 	"mentorChatBackend/models/files"
-	"mentorChatBackend/models/types"
-	"mentorChatBackend/models/users"
 	"mentorChatBackend/models/tokens"
+	"mentorChatBackend/models/types"
 	"strconv"
 )
 
@@ -15,16 +15,16 @@ type FileController struct {
 
 func (c *FileController) Prepare() {
 	TokenString := c.Ctx.GetCookie("token")
-	if UIDString==""{
+	if TokenString == "" {
 		return
-	}else{
-		tokenuint,err := strconv.ParseUint(TokenString, 16, 64)
-		if err!=nil{
+	} else {
+		tokenuint, err := strconv.ParseUint(TokenString, 16, 64)
+		if err != nil {
 			return
 		}
 		token := types.TokenID_t(tokenuint)
-		uid,err := tokens.Get(token)
-		if err!=nil{
+		uid, err := tokens.Get(token)
+		if err != nil {
 			return
 		}
 		c.Data["userid"] = uid
@@ -32,7 +32,7 @@ func (c *FileController) Prepare() {
 }
 
 func (c *FileController) NewFile() {
-	file, fileheader, err := c.GetFile("file")
+	file, _, err := c.GetFile("file")
 	if err != nil {
 		beego.BeeLogger.Error("failed dealing with uploaded file : %v\n", err)
 		c.Data["json"] = map[string]interface{}{
@@ -41,8 +41,22 @@ func (c *FileController) NewFile() {
 		}
 		c.ServeJSON()
 	} else {
+		data, err := ioutil.ReadAll(file)
+		if err != nil {
+			beego.BeeLogger.Error("failed dealing with uploaded file : %v\n", err)
+			c.Data["json"] = map[string]interface{}{
+				"result": "failed",
+				"error":  "failed to upload file",
+			}
+			c.ServeJSON()
+			return
+		}
+		fileid := files.NewFile(data)
 		c.Data["json"] = map[string]interface{}{
 			"result": "success",
+			"data": map[string]string{
+				"fileid": string(fileid),
+			},
 		}
 		c.ServeJSON()
 	}
@@ -56,7 +70,7 @@ func (c *FileController) RetrieveFile() {
 			"error":  "No fileid input",
 		}
 	}
-	data, err := files.GetFile(Id)
+	data, err := files.GetFile(types.FileID_t(Id))
 	if err != nil {
 		beego.BeeLogger.Error("failed dealing with retrieving file : %v\n", err)
 		c.Data["json"] = map[string]interface{}{
@@ -64,5 +78,5 @@ func (c *FileController) RetrieveFile() {
 			"error":  "failed to retrieve file",
 		}
 	}
-	c.
+	c.Ctx.ResponseWriter.Write(data)
 }

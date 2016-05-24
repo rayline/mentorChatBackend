@@ -40,14 +40,26 @@ Special permission with the only permission that changes the specific user's pas
 ##API list
 
 All APIs will stay under /api/ so that we can have a website if required.  
-POST methods should be transferring JSON to convoy parameters, for example 
+POST methods should be transferring URL encoded
+Return values will be in JSON and will include status of the operator, for example
+
+	{
+		"result":"success",
+		"data":{
+			"name":"wangyiru",
+			"mail":"wangyiru@wangyiru.com"
+		}
+	}
+
+and the failed one
 	
 	{
-		"name":"wangyiru",
-		"password":"secretDesu"
+		"result":"failed",
+		"error":"Internal Server Error"
 	}
 
 Caution : no comment should be included in JSON since it is not a JSON standard.  
+Caution1 : Do NOT be sensitive in case when Parsing JSON fields
 DEBUG means that the api is only for debugging and should be deprecated when deployed.  
 BLOCK means that the api may not return immediately, specially used for blocking message model.  
 
@@ -64,7 +76,7 @@ BLOCK means that the api may not return immediately, specially used for blocking
 	- POST a mail will be sent to the user's mail address to set password. The mail will include a token which will can reset password of the user (with /api/user/{userid} POST). NOT TO BE IMPLEMENTED THIS VERSION
 + /api/user/{userid}/messsage
 	- POST sends a message to a user. fileds: "message"(string)
-	- GET (BLOCK) returns a pushed MESSAGE. fileds: "type"(string, and should be defined in part Defination of MESSAGE Types)
+	- GET (BLOCK) returns a pushed MESSAGE. fileds: "type"(string, and should be defined in part Defination of MESSAGE Types), "source" "content"
 + /api/user/{userid}/friendlist
 	- GET returns the friend list of the user. fileds: "friendlist"(uint64[])
 	- POST changes the friend list of the user. fields: "behavior"(string, only "DELETE" and adding friends should be done with friendrequest) "friendlist"(uint64[])
@@ -82,7 +94,7 @@ BLOCK means that the api may not return immediately, specially used for blocking
 
 ##data types clarification
 
-+ uint64 : precise 64-bit integer unsigned, expressed in hexdecmical
++ uint64 : precise 64-bit integer unsigned, expressed in DECMICAL
 + string : a string of characters, with a length of no limit if not ridiculous
 + string(len) : a string with max length of len
 + (typename)[]: array of a type of data, such as uint64[]

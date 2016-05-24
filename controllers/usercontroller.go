@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"encoding/json"
 	"github.com/astaxie/beego"
 	"mentorChatBackend/models/tokens"
 	"mentorChatBackend/models/types"
@@ -15,10 +14,10 @@ type UserController struct {
 
 func (c *UserController) Prepare() {
 	TokenString := c.Ctx.GetCookie("token")
-	if UIDString == "" {
+	if TokenString == "" {
 		return
 	} else {
-		tokenuint, err := strconv.ParseUint(TokenString, 16, 64)
+		tokenuint, err := strconv.ParseUint(TokenString, 10, 64)
 		if err != nil {
 			return
 		}
@@ -33,7 +32,7 @@ func (c *UserController) Prepare() {
 
 func (c *UserController) AllUsers() {
 	if beego.AppConfig.String("runmode") == "dev" {
-		if userList, err := users.GetAll(); err != nil {
+		if data, err := users.GetAllUserId(); err != nil {
 			c.Data["json"] = map[string]interface{}{
 				"result": "failed",
 				"error":  "failed to get the list",
@@ -41,23 +40,18 @@ func (c *UserController) AllUsers() {
 			c.ServeJSON()
 			return
 		} else {
-			data, err := json.Marshal(users.GetAll())
-			if err != nil {
-				beego.BeeLogger.Error("failed to Marshal user list : %v\n", err)
-				c.Data["json"] = map[string]interface{}{
-					"result": "failed",
-					"error":  "failed to generate the list",
-				}
-				c.ServeJSON()
-				return
+			c.Data["json"] = map[string]interface{}{
+				"result": "failed",
+				"data":   data,
 			}
-			c.Ctx.ResponseWriter.Write(data)
+			c.ServeJSON()
+			return
 		}
 	}
 }
 
 func (c *UserController) GetUser() {
-	requesteeId, err := stringToUserId(c.Ctx.Input.Param("userid"))
+	requesteeId, err := stringToUserId(c.Ctx.Input.Param(":userid"))
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
@@ -81,18 +75,22 @@ func (c *UserController) GetUser() {
 		}
 		if permission < users.SELF {
 			c.Data["json"] = map[string]interface{}{
-				"result":      "success",
-				"Name":        requestee.Name,
-				"Description": requestee.Description,
+				"result": "success",
+				"data": map[string]string{
+					"Name":        requestee.Name,
+					"Description": requestee.Description,
+				},
 			}
 			c.ServeJSON()
 			return
 		} else {
 			c.Data["json"] = map[string]interface{}{
-				"result":      "success",
-				"Name":        requestee.Name,
-				"Description": requestee.Description,
-				"Mail":        requestee.Mail,
+				"result": "success",
+				"data": map[string]string{
+					"Name":        requestee.Name,
+					"Description": requestee.Description,
+					"Mail":        requestee.Mail,
+				},
 			}
 			c.ServeJSON()
 			return
@@ -101,7 +99,7 @@ func (c *UserController) GetUser() {
 }
 
 func (c *UserController) ModifyUser() {
-	requesteeId, err := stringToUserId(c.Ctx.Input.Param("userid"))
+	requesteeId, err := stringToUserId(c.Ctx.Input.Param(":userid"))
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
@@ -126,18 +124,27 @@ func (c *UserController) ModifyUser() {
 	}
 	if permission < users.SELF {
 		c.Data["json"] = map[string]interface{}{
-			"result":      "success",
-			"Name":        requestee.Name,
-			"Description": requestee.Description,
+			"result": "failed",
+			"error":  "Access Denied",
 		}
 		c.ServeJSON()
 		return
 	} else {
+		if name := c.GetString("name"); name != "" {
+			requestee.Name = name
+		}
+		if mail := c.GetString("mail"); mail != "" {
+			requestee.Mail = mail
+		}
+		if description := c.GetString("description"); description != "" {
+			requestee.Description = description
+		}
+		if password := c.GetString("password"); password != "" {
+			requestee.Password = types.Password_t(password)
+		}
+		users.Set(requestee.Id, *requestee)
 		c.Data["json"] = map[string]interface{}{
-			"result":      "success",
-			"Name":        requestee.Name,
-			"Description": requestee.Description,
-			"Mail":        requestee.Mail,
+			"result": "success",
 		}
 		c.ServeJSON()
 		return
@@ -146,7 +153,7 @@ func (c *UserController) ModifyUser() {
 
 func (c *UserController) LoginUser() {
 	passwordStr := c.GetString("password")
-	requesteeId, err := stringToUserId(c.Ctx.Input.Param("userid"))
+	requesteeId, err := stringToUserId(c.Ctx.Input.Param(":userid"))
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
@@ -164,8 +171,8 @@ func (c *UserController) LoginUser() {
 		c.ServeJSON()
 		return
 	}
-	if requestee.Validate(passwordStr) {
-		c.Ctx.SetCookie("token", tokens.NewToken(requestee.Id))
+	if requestee.Validate(types.Password_t(passwordStr)) {
+		c.Ctx.SetCookie("token", string(tokens.NewToken(requestee.Id)))
 		c.Data["json"] = map[string]interface{}{
 			"result": "success",
 		}
@@ -181,8 +188,63 @@ func (c *UserController) LoginUser() {
 	}
 }
 
+func (c *UserController) NewUser() {
+	Id := users.AllocUID()
+	c.Data["json"] = map[string]interface{}{
+		"result": "success",
+		"data": map[string]string{
+			"userid": string(Id),
+		},
+	}
+	token := tokens.NewToken(Id)
+	c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 10))
+	c.ServeJSON()
+}
+
 func (c *UserController) SendMessage() {
-	requesteeId, err := stringToUserId(c.Ctx.Input.Param("userid"))
+	requesteeId, err := stringToUserId(c.Ctx.Input.Param(":userid"))
+	message := c.GetString("message")
+	if err != nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "failed to parse requested ID",
+		}
+		c.ServeJSON()
+		return
+	}
+	userid := types.UserID_t(0)
+	if uidInterface, exist := c.Data["userid"]; exist == true {
+		userid = uidInterface.(types.UserID_t)
+	}
+	requester, err := users.GetWithNoInformation(userid)
+	if err != nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "failed to get requester",
+		}
+		c.ServeJSON()
+		return
+	}
+	err = requester.SendMessage(requesteeId, message)
+	if err == users.ErrAccessDenied {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "access denied",
+		}
+		c.ServeJSON()
+		return
+	} else if err != nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "Server Internal Error",
+		}
+		c.ServeJSON()
+		return
+	}
+}
+
+func (c *UserController) GetMESSAGE() {
+	requesteeId, err := stringToUserId(c.Ctx.Input.Param(":userid"))
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
@@ -205,35 +267,175 @@ func (c *UserController) SendMessage() {
 		c.ServeJSON()
 		return
 	}
-}
-
-func (c *UserController) GetMESSAGE() {
-
+	if permission < users.SELF {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "access denied",
+		}
+		c.ServeJSON()
+		return
+	}
+	MESSAGE := requestee.GetMESSAGE()
+	if MESSAGE == nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "success",
+		}
+		c.ServeJSON()
+		return
+	} else {
+		c.Data["json"] = map[string]interface{}{
+			"result": "success",
+			"data":   *MESSAGE,
+		}
+		c.ServeJSON()
+		return
+	}
 }
 
 func (c *UserController) ModifyFriendList() {
-
+	if c.GetString("behavior") != "DELETE" {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "Unknown Behavior",
+		}
+		c.ServeJSON()
+		return
+	}
+	user := &users.User{}
+	if uidInterface, exist := c.Data["userid"]; exist == true {
+		userid := uidInterface.(types.UserID_t)
+		var err error
+		user, err = users.GetWithNoInformation(userid)
+		if err != nil {
+			c.Data["json"] = map[string]interface{}{
+				"result": "failed",
+				"error":  "Access Denied",
+			}
+		}
+	}
+	UIDStrings := c.GetStrings("friendlist")
+	for _, v := range UIDStrings {
+		if userid, err := stringToUserId(v); err != nil {
+			continue
+		} else {
+			user.DeleteFriend(userid)
+		}
+	}
 }
 
 func (c *UserController) GetFriendList() {
-
+	user := &users.User{}
+	if uidInterface, exist := c.Data["userid"]; exist == true {
+		userid := uidInterface.(types.UserID_t)
+		var err error
+		user, err = users.GetWithNoInformation(userid)
+		if err != nil {
+			c.Data["json"] = map[string]interface{}{
+				"result": "failed",
+				"error":  "Access Denied",
+			}
+			c.ServeJSON()
+			return
+		}
+	}
+	uList := user.GetFriendList()
+	c.Data["json"] = map[string]interface{}{
+		"result": "success",
+		"data": map[string]interface{}{
+			"friendlist": uList,
+		},
+	}
+	c.ServeJSON()
+	return
 }
 
 func (c *UserController) SendFriendRequest() {
-
+	requesteeId, err := stringToUserId(c.Ctx.Input.Param(":userid"))
+	message := c.GetString("message")
+	if err != nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "failed to parse requested ID",
+		}
+		c.ServeJSON()
+		return
+	}
+	userid := types.UserID_t(0)
+	if uidInterface, exist := c.Data["userid"]; exist == true {
+		userid = uidInterface.(types.UserID_t)
+	}
+	requester, err := users.GetWithNoInformation(userid)
+	if err != nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "failed to get requester",
+		}
+		c.ServeJSON()
+		return
+	}
+	err = requester.SendFriendRequest(requesteeId, message)
+	if err == users.ErrAccessDenied {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "access denied",
+		}
+		c.ServeJSON()
+		return
+	} else if err != nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "Server Internal Error",
+		}
+		c.ServeJSON()
+		return
+	}
 }
 
 func (c *UserController) GetUserIdByMail() {
-
+	mail := c.Ctx.Input.Param(":usermail")
+	u, err := users.GetByMail(mail)
+	if err != nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "No such mail",
+		}
+		c.ServeJSON()
+		return
+	}
+	c.Data["json"] = map[string]interface{}{
+		"result": "success",
+		"data": map[string]string{
+			"userid": string(u.Id),
+		},
+	}
+	c.ServeJSON()
+	return
 }
 
 func (c *UserController) GetUserIdByName() {
-
+	name := c.Ctx.Input.Param(":username")
+	u, err := users.GetByMail(name)
+	if err != nil {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "No such name",
+		}
+		c.ServeJSON()
+		return
+	}
+	c.Data["json"] = map[string]interface{}{
+		"result": "success",
+		"data": map[string]string{
+			"userid": string(u.Id),
+		},
+	}
+	c.ServeJSON()
+	return
 }
 
 func stringToUserId(IdStr string) (types.UserID_t, error) {
-	IDStr := IdStr
-	IdInt, err := strconv.ParseUint(requesteeIDStr, 16, 64)
+	requesteeIDStr := IdStr
+	IdInt, err := strconv.ParseUint(requesteeIDStr, 10, 64)
 	ID := types.UserID_t(IdInt)
 	return ID, err
 }
