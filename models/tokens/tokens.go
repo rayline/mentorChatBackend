@@ -5,7 +5,12 @@ import "mentorChatBackend/models/types"
 import "sync"
 import "fmt"
 
-var tokenMap = map[types.TokenID_t]Token{}
+type token struct {
+	Id       types.UserID_t
+	lastUsed time.Time
+}
+
+var tokenMap = map[types.TokenID_t]*token{}
 var tokenCnt types.TokenID_t = 1
 
 var tokenMutex sync.RWMutex
@@ -14,11 +19,6 @@ const MESSAGE_BLOCKING_LIMIT time.Duration = 30 * time.Second
 
 func init() {
 
-}
-
-type token struct {
-	Id       uint64
-	lastUsed time.Time
 }
 
 func NewToken(Id types.UserID_t) types.TokenID_t {
@@ -36,7 +36,8 @@ func NewToken(Id types.UserID_t) types.TokenID_t {
 func Get(Id types.TokenID_t) (types.UserID_t, error) {
 	tokenMutex.RLock()
 	defer tokenMutex.RUnlock()
-	var t token
+	var t *token
+	var exist bool
 	if t, exist = tokenMap[Id]; exist == false {
 		return 0, fmt.Errorf("Token: Token ID %d does not exist", Id)
 	}

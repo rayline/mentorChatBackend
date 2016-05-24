@@ -6,6 +6,8 @@ import "github.com/garyburd/redigo/redis"
 import "mentorChatBackend/models/consts"
 import "encoding/json"
 import "time"
+import "sync"
+import "fmt"
 
 type User struct {
 	Id                      types.UserID_t
@@ -15,7 +17,7 @@ type User struct {
 
 func newPool(server, password string, database int) *redis.Pool {
 	return &redis.Pool{
-		MaxIdle:     3,
+		MaxIdle:     100,
 		IdleTimeout: 240 * time.Second,
 		Dial: func() (redis.Conn, error) {
 			c, err := redis.Dial("tcp", server)
@@ -37,15 +39,26 @@ func newPool(server, password string, database int) *redis.Pool {
 }
 
 var (
-	pool0, pool1, pool2 *redis.Pool
-	redisServer         = consts.RedisServer
-	redisPassword       = consts.RdisPassword
+	pool0, pool1, pool2, pool3, pool4 *redis.Pool
+	redisServer                                      = consts.RedisServer
+	redisPassword                                    = consts.RdisPassword
+	nextUID                           types.UserID_t = 1
+	UIDAllocMutex                     sync.Mutex
 )
 
 func init() {
 	pool0 = newPool(redisServer, redisPassword, 0)
 	pool1 = newPool(redisServer, redisPassword, 1)
 	pool2 = newPool(redisServer, redisPassword, 2)
+	pool3 = newPool(redisServer, redisPassword, 3)
+	pool4 = newPool(redisServer, redisPassword, 4)
+	conn := pool0.Get()
+	defer conn.Close()
+	id, err := redis.Uint64(conn.Do("GET", "NEXTUID"))
+	if err != nil {
+		panic(fmt.Sprintf("Failed to get uid count: %v", err))
+	}
+	nextUID = types.UserID_t(id)
 }
 
 func (u *User) IsFriend(Id types.UserID_t) bool {
@@ -95,4 +108,91 @@ func (u *User) AddMESSAGE(MESSAGE types.Message_t) {
 	if _, err = conn.Do("LPUSH", data); err != nil {
 		beego.BeeLogger.Error("%v\n", err)
 	}
+}
+
+var ErrAccessDenied = fmt.Errorf("Acess Denied")
+
+const (
+	UserMessage       = "U"
+	SystemAnnouncment = "S"
+	FriendRequest     = "F"
+)
+
+func (u *User) SendMessage(Id types.UserID_t, message string) error {
+	if GetPermission(u.Id, Id) >= FRIEND {
+		requestee, err := GetWithNoInformation(Id)
+		if err != nil {
+			return nil
+		}
+		requestee.AddMESSAGE(types.Message_t{
+			Source:  u.Id,
+			Content: message,
+			Type:    UserMessage,
+		})
+		return nil
+	} else {
+		return ErrAccessDenied
+	}
+}
+
+func (u *User) SendFriendRequest(Id types.UserID_t, message string) error {
+	if GetPermission(u.Id, Id) >= STRANGER {
+		requestee, err := GetWithNoInformation(Id)
+		if err != nil {
+			return nil
+		}
+		requestee.AddMESSAGE(types.Message_t{
+			Source:  u.Id,
+			Content: message,
+			Type:    FriendRequest,
+		})
+		return nil
+	} else {
+		return ErrAccessDenied
+	}
+}
+
+func (u *User) SendSystemAnnouncment(message string) error {
+	u.AddMESSAGE(types.Message_t{
+		Source:  0,
+		Content: message,
+		Type:    SystemAnnouncment,
+	})
+	return nil
+}
+
+func (u *User) Validate(password types.Password_t) bool {
+	if u.Password == password {
+		return true
+	} else {
+		return false
+	}
+}
+
+const BLOCK_TIME = "15"
+
+func (u *User) GetMESSAGE() *types.Message_t {
+	conn := pool1.Get()
+	defer conn.Close()
+	data, err := redis.MultiBulk(conn.Do("BRPOP", u.Id, BLOCK_TIME))
+	if err == redis.ErrNil {
+		return nil
+	} else if err == nil {
+		MESSAGEBytes, err := redis.Bytes(data[1], nil)
+		if err != nil {
+			beego.BeeLogger.Error("Failed to parse message returned : %v\n", err)
+			return nil
+		}
+		MESSAGE := types.Message_t{}
+		err = json.Unmarshal(MESSAGEBytes, &MESSAGE)
+		if err != nil {
+			beego.BeeLogger.Error("Failed to parse message returned : %v\n", err)
+			return nil
+		}
+		return &MESSAGE
+	}
+}
+
+func (u *User) GetFriendList() []types.UserID_t {
+
 }

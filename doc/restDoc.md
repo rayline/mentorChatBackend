@@ -52,14 +52,14 @@ DEBUG means that the api is only for debugging and should be deprecated when dep
 BLOCK means that the api may not return immediately, specially used for blocking message model.  
 
 + /api/users (DEBUG)
-	- GET getting all user information. Fileds: "userid"(uint64[])
+	- GET getting all user ID. Fileds: "userid"(uint64[])
 + /api/user/new
 	- GET allocating a new user id whose information is not set yet, and should be set before using. A token will also be returned so that caller will be able to set password. User id with no password set for time EMPTY_USER_LIFE (constant, in seconds) will be deprecated and returned to the id pool. filed: "userid"(uint64)
 + /api/user/{userid}
 	- GET returns the information of the user. Content varies as permissions of user. Field names will be named the same as is in the defination of user. 
 	- POST setting user information, including password. Operation may be denied with low permission. If you don't wish to change a field, do not mention it, otherwise it will be cleared or result in other errors. Field names will be named the same as is in the defination of user. 
 + /api/user/{userid}/login
-	- POST with the right password, a token indicating the user will be returned. filed: "password"(string)
+	- POST with the right password, a token indicating the user will be set as cookie. filed: "password"(string)
 + /api/user/{userid}/resetpassword
 	- POST a mail will be sent to the user's mail address to set password. The mail will include a token which will can reset password of the user (with /api/user/{userid} POST). NOT TO BE IMPLEMENTED THIS VERSION
 + /api/user/{userid}/messsage
@@ -78,7 +78,6 @@ BLOCK means that the api may not return immediately, specially used for blocking
 	- POST upload a new file, in the way of multipart. field: "file"(multipart). Returns the file id for future use. field: "fileid"(uint64)
 + /api/file/{fileid}
 	- GET returns the file, in common raw file, not a multipart.
-	- DELETE deletes the file. Only the uploader and administrators have this permission.
 
 
 ##data types clarification

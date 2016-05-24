@@ -5,7 +5,7 @@ type TokenID_t uint64
 type Password_t string
 type FileID_t string
 type Message_t struct {
-	from    UserID_t
+	Source  UserID_t
 	Type    string
 	Content string
 }

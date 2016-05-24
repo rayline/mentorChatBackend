@@ -37,3 +37,13 @@
 + type: string
 + name: NEXTUID
 + default: "1"
+
+###mail indexing
++ database 3
++ type: string
++ encoding: dec
+
+###name indexing
++ database 4
++ type: string
++ encoding: dec

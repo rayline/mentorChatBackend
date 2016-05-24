@@ -17,5 +17,5 @@ func init() {
 	beego.Router("/api/usermail/:usermail", &controllers.UserController{}, "get:GetUserIdByMail")
 	beego.Router("/api/username/:username", &controllers.UserController{}, "get:GetUserIdByName")
 	beego.Router("/api/file/new", &controllers.FileController{}, "post:NewFile")
-	beego.Router("/api/file/:fileid", &controllers.FileController{}, "get:GetFile;delete:DeleteFile")
+	beego.Router("/api/file/:fileid", &controllers.FileController{}, "get:RetrieveFile")
 }
