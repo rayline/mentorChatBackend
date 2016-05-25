@@ -4,7 +4,7 @@ import "testing"
 import "mentorChatBackend/models/tokens"
 import "mentorChatBackend/models/users"
 
-func TestTokens(t testing.T) {
+func TestTokens(t *testing.T) {
 	//testing basic token creating and retrieving
 	uid := users.AllocUID()
 	if uid == 0 {
