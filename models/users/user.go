@@ -9,6 +9,7 @@ import "sync"
 import "fmt"
 import "strconv"
 import "log"
+import "os"
 
 type User struct {
 	Id                      types.UserID_t
@@ -49,6 +50,11 @@ var (
 
 func init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	f, err := os.OpenFile("mentorChatUSERS.log", os.O_CREATE|os.O_WRONLY, os.ModePerm)
+	if err != nil {
+		log.Fatalln("Unable to create log file : ", err)
+	}
+	log.SetOutput(f)
 	pool0 = newPool(redisServer, redisPassword, 0)
 	pool1 = newPool(redisServer, redisPassword, 1)
 	pool2 = newPool(redisServer, redisPassword, 2)

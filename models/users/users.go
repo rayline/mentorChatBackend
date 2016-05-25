@@ -161,7 +161,7 @@ func AllocUID() types.UserID_t {
 func setName(Id types.UserID_t, name string) {
 	conn := pool4.Get()
 	defer conn.Close()
-	if _, err := conn.Do("SET", name, Id); err != nil {
+	if _, err := conn.Do("SET", name, uint64(Id)); err != nil {
 		log.Printf("%v\n", err)
 		return
 	}
@@ -170,7 +170,7 @@ func setName(Id types.UserID_t, name string) {
 func setMail(Id types.UserID_t, mail string) {
 	conn := pool3.Get()
 	defer conn.Close()
-	if _, err := conn.Do("SET", mail, Id); err != nil {
+	if _, err := conn.Do("SET", mail, uint64(Id)); err != nil {
 		log.Printf("%v\n", err)
 		return
 	}

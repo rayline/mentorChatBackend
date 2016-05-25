@@ -436,7 +436,7 @@ func (c *UserController) GetUserIdByMail() {
 
 func (c *UserController) GetUserIdByName() {
 	name := c.Ctx.Input.Param(":username")
-	u, err := users.GetByMail(name)
+	u, err := users.GetByName(name)
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
