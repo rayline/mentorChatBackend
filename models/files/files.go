@@ -17,10 +17,12 @@ func GetFile(Id types.FileID_t) (data []byte, err error) {
 func NewFile(data []byte) types.FileID_t {
 	for Id := types.FileID_t(""); Id == ""; {
 		Id = types.FileID_t(types.FileID_t(randomString()))
-		os.Mkdir("static/userfiles/", os.ModePerm)
-		f, err := os.OpenFile("static/userfiles/"+string(Id), os.O_CREATE|os.O_EXCL, os.ModePerm)
+		os.MkdirAll("static/userfiles/", os.ModePerm)
+		f, err := os.OpenFile("static/userfiles/"+string(Id), os.O_CREATE|os.O_EXCL|os.O_WRONLY, os.ModePerm)
 		if err != nil {
-			log.Println(err)
+			if !os.IsExist(err) {
+				log.Println(err)
+			}
 			Id = ""
 		} else {
 			f.Write(data)
