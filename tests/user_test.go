@@ -53,6 +53,7 @@ func TestUserLogin(t *testing.T) {
 	if u.Validate("123456") == false {
 		t.Fatal("Wrongly declined")
 	}
+
 }
 
 func TestUserChangeName(t *testing.T) {

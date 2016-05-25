@@ -41,7 +41,7 @@ func (c *UserController) AllUsers() {
 			return
 		} else {
 			c.Data["json"] = map[string]interface{}{
-				"result": "failed",
+				"result": "success",
 				"data":   data,
 			}
 			c.ServeJSON()
@@ -95,6 +95,13 @@ func (c *UserController) GetUser() {
 			c.ServeJSON()
 			return
 		}
+	} else {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "Access Denied",
+		}
+		c.ServeJSON()
+		return
 	}
 }
 
