@@ -98,8 +98,11 @@ func (c *UserController) GetUser() {
 		}
 	} else {
 		c.Data["json"] = map[string]interface{}{
-			"result": "failed",
-			"error":  "Access Denied",
+			"result": "success",
+			"data": map[string]string{
+				"Name":        requestee.Name,
+				"Description": requestee.Description,
+			},
 		}
 		c.ServeJSON()
 		return
@@ -107,6 +110,7 @@ func (c *UserController) GetUser() {
 }
 
 func (c *UserController) ModifyUser() {
+	//TODO:it is not checked whether a name a duplicated and when changing name the index of old name was not removed
 	requesteeId, err := stringToUserId(c.Ctx.Input.Param(":userid"))
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
@@ -406,7 +410,7 @@ func (c *UserController) GetUserIdByMail() {
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
-			"error":  "No such mail",
+			"error":  "No such mail : " + mail,
 		}
 		c.ServeJSON()
 		return
@@ -427,7 +431,7 @@ func (c *UserController) GetUserIdByName() {
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
-			"error":  "No such name",
+			"error":  "No such name :" + name,
 		}
 		c.ServeJSON()
 		return
