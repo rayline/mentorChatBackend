@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 	"mentorChatBackend/models/tokens"
 	"mentorChatBackend/models/types"
@@ -116,8 +117,9 @@ func (c *UserController) ModifyUser() {
 		return
 	}
 	permission := users.NONE
+	userid := types.UserID_t(0)
 	if uidInterface, exist := c.Data["userid"]; exist == true {
-		userid := uidInterface.(types.UserID_t)
+		userid = uidInterface.(types.UserID_t)
 		permission = users.GetPermission(userid, requesteeId)
 	}
 	requestee, err := users.Get(requesteeId)
@@ -132,7 +134,7 @@ func (c *UserController) ModifyUser() {
 	if permission < users.SELF {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
-			"error":  "Access Denied",
+			"error":  fmt.Sprintf("Access Denied %v to %v", userid, requesteeId),
 		}
 		c.ServeJSON()
 		return
