@@ -3,6 +3,7 @@ package tests
 import "testing"
 import "mentorChatBackend/models/users"
 import "mentorChatBackend/models/types"
+import "time"
 
 func TestUserAlloc(t *testing.T) {
 	//testing basic user registering
@@ -24,6 +25,34 @@ func TestUserAlloc(t *testing.T) {
 		t.Fatal("Failed to change password")
 	}
 
+}
+
+func TestUserLogin(t *testing.T) {
+	//testing basic user registering
+	uid := users.AllocUID()
+	if uid == 0 {
+		t.Fatalf("Failed to alloc user")
+	}
+	u, err := users.Get(uid)
+	if err != nil {
+		t.Fatal(err)
+	}
+	u.Password = "123456"
+	users.Set(uid, *u)
+	u, err = users.Get(uid)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if u.Password != "123456" {
+		t.Fatal("Failed to change password")
+	}
+
+	if u.Validate("654321") == true {
+		t.Fatal("Wrongly validated")
+	}
+	if u.Validate("123456") == false {
+		t.Fatal("Wrongly declined")
+	}
 }
 
 func TestUserChangeName(t *testing.T) {
@@ -107,6 +136,39 @@ func TestUserGetMESSAGE(t *testing.T) {
 		Content: "test",
 		Type:    users.SystemAnnouncment,
 	})
+	MESSAGE = u.GetMESSAGE()
+	if MESSAGE == nil {
+		t.Fatal("Failed to get or add message")
+	}
+
+}
+
+func TestUserGetMESSAGEAsync(t *testing.T) {
+	//tesing system adding message to message queue and user retrieving it
+	uid := users.AllocUID()
+	if uid == 0 {
+		t.Fatalf("Failed to alloc user")
+	}
+	u, err := users.Get(uid)
+	if err != nil {
+		t.Fatal(err)
+	}
+	u.Password = "123456"
+	u, err = users.Get(uid)
+
+	MESSAGE := u.GetMESSAGE()
+	if MESSAGE != nil {
+		t.Fatal("Failed to get empty message")
+	}
+
+	go func() {
+		time.Sleep(10 * time.Second)
+		u.AddMESSAGE(types.Message_t{
+			Source:  0,
+			Content: "test",
+			Type:    users.SystemAnnouncment,
+		})
+	}()
 	MESSAGE = u.GetMESSAGE()
 	if MESSAGE == nil {
 		t.Fatal("Failed to get or add message")
