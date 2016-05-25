@@ -48,6 +48,7 @@ var (
 )
 
 func init() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	pool0 = newPool(redisServer, redisPassword, 0)
 	pool1 = newPool(redisServer, redisPassword, 1)
 	pool2 = newPool(redisServer, redisPassword, 2)
