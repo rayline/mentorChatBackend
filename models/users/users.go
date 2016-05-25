@@ -112,6 +112,12 @@ func Set(Id types.UserID_t, u User) {
 	}
 	var origin User
 	json.Unmarshal(originJson, &origin)
+	if origin.Id == 0 {
+		origin.Id = Id
+	}
+	if origin.Id != Id {
+		log.Printf("ID stored in DB not same with input\n")
+	}
 	if u.Password != "" {
 		origin.Password = u.Password
 	}
