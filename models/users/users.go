@@ -109,7 +109,6 @@ func Set(Id types.UserID_t, u User) {
 	originJson, err := redis.Bytes(conn.Do("GET", Id))
 	if err != nil {
 		log.Printf("%v\n", err)
-		return
 	}
 	var origin User
 	json.Unmarshal(originJson, &origin)
