@@ -426,9 +426,10 @@ func (c *UserController) GetUserIdByMail() {
 	}
 	c.Data["json"] = map[string]interface{}{
 		"result": "success",
-		"data": map[string]string{
-			"userid": string(u.Id),
+		"data": map[string]interface{}{
+			"userid": u.Id,
 		},
+		"dbgdata": u,
 	}
 	c.ServeJSON()
 	return
@@ -447,8 +448,8 @@ func (c *UserController) GetUserIdByName() {
 	}
 	c.Data["json"] = map[string]interface{}{
 		"result": "success",
-		"data": map[string]string{
-			"userid": string(u.Id),
+		"data": map[string]interface{}{
+			"userid": u.Id,
 		},
 	}
 	c.ServeJSON()
