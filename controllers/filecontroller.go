@@ -3,6 +3,7 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"io/ioutil"
+	"log"
 	"mentorChatBackend/models/files"
 	"mentorChatBackend/models/tokens"
 	"mentorChatBackend/models/types"
