@@ -192,8 +192,8 @@ func (c *UserController) NewUser() {
 	Id := users.AllocUID()
 	c.Data["json"] = map[string]interface{}{
 		"result": "success",
-		"data": map[string]string{
-			"userid": string(Id),
+		"data": map[string]interface{}{
+			"userid": Id,
 		},
 	}
 	token := tokens.NewToken(Id)
