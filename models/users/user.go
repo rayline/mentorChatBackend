@@ -63,7 +63,9 @@ func init() {
 	conn := pool0.Get()
 	defer conn.Close()
 	id, err := redis.Uint64(conn.Do("GET", "NEXTUID"))
-	if err != nil {
+	if err == redis.ErrNil {
+		conn.Do("SET", "NEXTUID", 1)
+	} else if err != nil {
 		panic(fmt.Sprintf("Failed to get uid count: %v", err))
 	}
 	nextUID = types.UserID_t(id)
