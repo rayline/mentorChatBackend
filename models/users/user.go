@@ -77,7 +77,7 @@ func (u *User) IsFriend(Id types.UserID_t) bool {
 	defer conn.Close()
 	is, err := redis.Bool(conn.Do("SISMEMBER", uint64(u.Id), uint64(Id)))
 	if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 	}
 	return is
 }
@@ -87,7 +87,7 @@ func (u *User) AcceptAsFriend(Id types.UserID_t) {
 	defer conn.Close()
 	_, err := conn.Do("SADD", uint64(u.Id), uint64(Id))
 	if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 	}
 }
 
@@ -96,11 +96,11 @@ func (u *User) DeleteFriend(Id types.UserID_t) {
 	defer conn.Close()
 	_, err := conn.Do("SREM", uint64(u.Id), uint64(Id))
 	if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 	}
 	_, err = conn.Do("SREM", uint64(Id), uint64(u.Id))
 	if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 	}
 }
 
@@ -109,11 +109,11 @@ func (u *User) AddMESSAGE(MESSAGE types.Message_t) {
 	defer conn.Close()
 	data, err := json.Marshal(MESSAGE)
 	if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return
 	}
 	if _, err = conn.Do("LPUSH", uint64(u.Id), data); err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 	}
 }
 
@@ -189,18 +189,18 @@ func (u *User) GetMESSAGE() *types.Message_t {
 	} else if err == nil {
 		MESSAGEBytes, err := redis.Bytes(data[1], nil)
 		if err != nil {
-			log.Printf("Failed to parse message returned : %v\n", err)
+			beego.Error("Failed to parse message returned : %v\n", err)
 			return nil
 		}
 		MESSAGE := types.Message_t{}
 		err = json.Unmarshal(MESSAGEBytes, &MESSAGE)
 		if err != nil {
-			log.Printf("Failed to parse message returned : %v\n", err)
+			beego.Error("Failed to parse message returned : %v\n", err)
 			return nil
 		}
 		return &MESSAGE
 	} else {
-		log.Printf("Failed to retrieve message : %v\n", err)
+		beego.Error("Failed to retrieve message : %v\n", err)
 		return nil
 	}
 }
@@ -210,7 +210,7 @@ func (u *User) GetFriendList() []types.UserID_t {
 	defer conn.Close()
 	Idstrings, err := redis.Strings(conn.Do("SMEMBERS", uint64(u.Id)))
 	if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return nil
 	}
 	uList := []types.UserID_t{}

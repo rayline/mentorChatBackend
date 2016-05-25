@@ -12,19 +12,19 @@ func GetAll() ([]*User, error) {
 	defer conn.Close()
 	Idstrings, err := redis.Strings(conn.Do("KEYS", "[0-9]*"))
 	if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return nil, fmt.Errorf("users: failed getting user list:%v\n", err)
 	}
 	uList := []*User{}
 	for _, v := range Idstrings {
 		Id, err := strconv.ParseUint(v, 10, 64)
 		if err != nil {
-			log.Printf("Unexpected number conversion error: %v", err)
+			beego.Error("Unexpected number conversion error: %v", err)
 			continue
 		}
 		u, err := Get(types.UserID_t(Id))
 		if err != nil {
-			log.Printf("%v\n", err)
+			beego.Error("%v\n", err)
 			continue
 		}
 		uList = append(uList, u)
@@ -37,7 +37,7 @@ func GetAllUserId() ([]types.UserID_t, error) {
 	defer conn.Close()
 	Idstrings, err := redis.Strings(conn.Do("KEYS", "[0-9]*"))
 	if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return nil, fmt.Errorf("users: failed getting user list:%v\n", err)
 	}
 	uList := []types.UserID_t{}
@@ -58,7 +58,7 @@ func Get(Id types.UserID_t) (*User, error) {
 	if err == redis.ErrNil {
 		return nil, fmt.Errorf("users: user %v does not exist", Id)
 	} else if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return nil, fmt.Errorf("users: failed getting user with uid %v\n%v\n", Id, err)
 	}
 	var u User
@@ -73,7 +73,7 @@ func GetByName(Name string) (*User, error) {
 	if err == redis.ErrNil {
 		return nil, fmt.Errorf("users: user name %v does not exist", Name)
 	} else if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return nil, fmt.Errorf("users: failed getting user with name %v\n%v\n", Name, err)
 	}
 	return Get(types.UserID_t(Id))
@@ -86,7 +86,7 @@ func GetByMail(Mail string) (*User, error) {
 	if err == redis.ErrNil {
 		return nil, fmt.Errorf("users: user mail %v does not exist", Mail)
 	} else if err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return nil, fmt.Errorf("users: failed getting user with mail %v\n%v\n", Mail, err)
 	}
 	return Get(types.UserID_t(Id))
@@ -108,7 +108,7 @@ func Set(Id types.UserID_t, u User) {
 	defer conn.Close()
 	originJson, err := redis.Bytes(conn.Do("GET", uint64(Id)))
 	if err != nil && err != redis.ErrNil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 	}
 	var origin User
 	json.Unmarshal(originJson, &origin)
@@ -116,7 +116,7 @@ func Set(Id types.UserID_t, u User) {
 		origin.Id = Id
 	}
 	if origin.Id != Id {
-		log.Printf("ID stored in DB not same with input\n")
+		beego.Error("ID stored in DB not same with input\n")
 	}
 	if u.Password != "" {
 		origin.Password = u.Password
@@ -138,7 +138,7 @@ func Set(Id types.UserID_t, u User) {
 	}
 	data, _ := json.Marshal(origin)
 	if _, err := conn.Do("SET", uint64(Id), data); err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return
 	}
 }
@@ -162,7 +162,7 @@ func setName(Id types.UserID_t, name string) {
 	conn := pool4.Get()
 	defer conn.Close()
 	if _, err := conn.Do("SET", name, uint64(Id)); err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return
 	}
 }
@@ -171,7 +171,7 @@ func setMail(Id types.UserID_t, mail string) {
 	conn := pool3.Get()
 	defer conn.Close()
 	if _, err := conn.Do("SET", mail, uint64(Id)); err != nil {
-		log.Printf("%v\n", err)
+		beego.Error("%v\n", err)
 		return
 	}
 }
