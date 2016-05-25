@@ -97,7 +97,7 @@ func GetWithNoInformation(Id types.UserID_t) (*User, error) {
 	u.Id = Id
 	conn := pool0.Get()
 	defer conn.Close()
-	if exist, err := redis.Bool(conn.Do("EXISTS", Id)); err != nil || exist == false {
+	if exist, err := redis.Bool(conn.Do("EXISTS", uint64(Id))); err != nil || exist == false {
 		return nil, fmt.Errorf("No such user %d", Id)
 	}
 	return u, nil
@@ -106,7 +106,7 @@ func GetWithNoInformation(Id types.UserID_t) (*User, error) {
 func Set(Id types.UserID_t, u User) {
 	conn := pool0.Get()
 	defer conn.Close()
-	originJson, err := redis.Bytes(conn.Do("GET", Id))
+	originJson, err := redis.Bytes(conn.Do("GET", uint64(Id)))
 	if err != nil && err != redis.ErrNil {
 		log.Printf("%v\n", err)
 	}
@@ -137,7 +137,7 @@ func Set(Id types.UserID_t, u User) {
 		origin.Mail = u.Mail
 	}
 	data, _ := json.Marshal(origin)
-	if _, err := conn.Do("SET", Id, data); err != nil {
+	if _, err := conn.Do("SET", uint64(Id), data); err != nil {
 		log.Printf("%v\n", err)
 		return
 	}
@@ -150,7 +150,7 @@ func AllocUID() types.UserID_t {
 		nextUID++
 		conn := pool0.Get()
 		defer conn.Close()
-		conn.Do("SET", "NEXTUID", nextUID)
+		conn.Do("SET", "NEXTUID", uint64(nextUID))
 	}()
 	u := User{}
 	u.Id = nextUID
