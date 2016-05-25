@@ -107,7 +107,7 @@ func Set(Id types.UserID_t, u User) {
 	conn := pool0.Get()
 	defer conn.Close()
 	originJson, err := redis.Bytes(conn.Do("GET", Id))
-	if err != nil {
+	if err != nil && err != redis.ErrNil {
 		log.Printf("%v\n", err)
 	}
 	var origin User

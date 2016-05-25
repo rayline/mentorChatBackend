@@ -103,7 +103,7 @@ func (u *User) AddMESSAGE(MESSAGE types.Message_t) {
 		log.Printf("%v\n", err)
 		return
 	}
-	if _, err = conn.Do("LPUSH", data); err != nil {
+	if _, err = conn.Do("LPUSH", u.Id, data); err != nil {
 		log.Printf("%v\n", err)
 	}
 }
