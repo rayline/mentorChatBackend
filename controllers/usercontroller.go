@@ -208,6 +208,11 @@ func (c *UserController) LoginUser() {
 		c.ServeJSON()
 		return
 	}
+	c.Data["json"] = map[string]interface{}{
+		"result": "success",
+	}
+	c.ServeJSON()
+	return
 }
 
 func (c *UserController) NewUser() {
@@ -263,6 +268,11 @@ func (c *UserController) SendMessage() {
 		c.ServeJSON()
 		return
 	}
+	c.Data["json"] = map[string]interface{}{
+		"result": "success",
+	}
+	c.ServeJSON()
+	return
 }
 
 func (c *UserController) GetMESSAGE() {
@@ -343,6 +353,11 @@ func (c *UserController) ModifyFriendList() {
 			user.DeleteFriend(userid)
 		}
 	}
+	c.Data["json"] = map[string]interface{}{
+		"result": "success",
+	}
+	c.ServeJSON()
+	return
 }
 
 func (c *UserController) GetFriendList() {
@@ -411,6 +426,11 @@ func (c *UserController) SendFriendRequest() {
 		c.ServeJSON()
 		return
 	}
+	c.Data["json"] = map[string]interface{}{
+		"result": "success",
+	}
+	c.ServeJSON()
+	return
 }
 
 func (c *UserController) GetUserIdByMail() {
@@ -427,9 +447,8 @@ func (c *UserController) GetUserIdByMail() {
 	c.Data["json"] = map[string]interface{}{
 		"result": "success",
 		"data": map[string]interface{}{
-			"userid": u.Id,
+			"userid": fmt.Sprint(u.Id),
 		},
-		"dbgdata": u,
 	}
 	c.ServeJSON()
 	return
@@ -449,7 +468,7 @@ func (c *UserController) GetUserIdByName() {
 	c.Data["json"] = map[string]interface{}{
 		"result": "success",
 		"data": map[string]interface{}{
-			"userid": u.Id,
+			"userid": fmt.Sprint(u.Id),
 		},
 	}
 	c.ServeJSON()
