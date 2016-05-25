@@ -15,7 +15,7 @@ func TestUserAlloc(t *testing.T) {
 		t.Fatal(err)
 	}
 	u.Password = "123456"
-	users.Set(uid, u)
+	users.Set(uid, *u)
 	u, err = users.Get(uid)
 	if err != nil {
 		t.Fatal(err)
@@ -38,7 +38,7 @@ func TestUserChangeName(t *testing.T) {
 	}
 	u.Name = "wyr"
 	u.Password = "123456"
-	users.Set(uid, u)
+	users.Set(uid, *u)
 	u, err = users.Get(uid)
 	if err != nil {
 		t.Fatal(err)
@@ -46,11 +46,11 @@ func TestUserChangeName(t *testing.T) {
 	if u.Name != "wyr" {
 		t.Fatal("Failed to change password")
 	}
-	uidb, err := users.GetByName("wyr")
+	ub, err := users.GetByName("wyr")
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uidb != uid {
+	if ub.Id != uid {
 		t.Fatal("failed to index")
 	}
 }
@@ -67,7 +67,7 @@ func TestUserChangeMail(t *testing.T) {
 	}
 	u.Mail = "wyr"
 	u.Password = "123456"
-	users.Set(uid, u)
+	users.Set(uid, *u)
 	u, err = users.Get(uid)
 	if err != nil {
 		t.Fatal(err)
@@ -75,11 +75,11 @@ func TestUserChangeMail(t *testing.T) {
 	if u.Mail != "wyr" {
 		t.Fatal("Failed to change password")
 	}
-	uidb, err := users.GetByMail("wyr")
+	ub, err := users.GetByMail("wyr")
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uidb != uid {
+	if ub.Id != uid {
 		t.Fatal("failed to index")
 	}
 }
