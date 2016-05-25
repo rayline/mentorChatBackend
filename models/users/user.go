@@ -66,7 +66,7 @@ func init() {
 func (u *User) IsFriend(Id types.UserID_t) bool {
 	conn := pool2.Get()
 	defer conn.Close()
-	is, err := redis.Bool(conn.Do("SISMEMBER", u.Id, Id))
+	is, err := redis.Bool(conn.Do("SISMEMBER", uint64(u.Id), uint64(Id)))
 	if err != nil {
 		log.Printf("%v\n", err)
 	}
@@ -76,7 +76,7 @@ func (u *User) IsFriend(Id types.UserID_t) bool {
 func (u *User) AcceptAsFriend(Id types.UserID_t) {
 	conn := pool2.Get()
 	defer conn.Close()
-	_, err := conn.Do("SADD", u.Id, Id)
+	_, err := conn.Do("SADD", uint64(u.Id), uint64(Id))
 	if err != nil {
 		log.Printf("%v\n", err)
 	}
@@ -85,11 +85,11 @@ func (u *User) AcceptAsFriend(Id types.UserID_t) {
 func (u *User) DeleteFriend(Id types.UserID_t) {
 	conn := pool2.Get()
 	defer conn.Close()
-	_, err := conn.Do("SREM", u.Id, Id)
+	_, err := conn.Do("SREM", uint64(u.Id), uint64(Id))
 	if err != nil {
 		log.Printf("%v\n", err)
 	}
-	_, err = conn.Do("SREM", Id, u.Id)
+	_, err = conn.Do("SREM", uint64(Id), uint64(u.Id))
 	if err != nil {
 		log.Printf("%v\n", err)
 	}
@@ -103,7 +103,7 @@ func (u *User) AddMESSAGE(MESSAGE types.Message_t) {
 		log.Printf("%v\n", err)
 		return
 	}
-	if _, err = conn.Do("LPUSH", u.Id, data); err != nil {
+	if _, err = conn.Do("LPUSH", uint64(u.Id), data); err != nil {
 		log.Printf("%v\n", err)
 	}
 }
@@ -174,7 +174,7 @@ const BLOCK_TIME = "15"
 func (u *User) GetMESSAGE() *types.Message_t {
 	conn := pool1.Get()
 	defer conn.Close()
-	data, err := redis.MultiBulk(conn.Do("BRPOP", u.Id, BLOCK_TIME))
+	data, err := redis.MultiBulk(conn.Do("BRPOP", uint64(u.Id), BLOCK_TIME))
 	if err == redis.ErrNil {
 		return nil
 	} else if err == nil {
@@ -199,7 +199,7 @@ func (u *User) GetMESSAGE() *types.Message_t {
 func (u *User) GetFriendList() []types.UserID_t {
 	conn := pool2.Get()
 	defer conn.Close()
-	Idstrings, err := redis.Strings(conn.Do("SMEMBERS", u.Id))
+	Idstrings, err := redis.Strings(conn.Do("SMEMBERS", uint64(u.Id)))
 	if err != nil {
 		log.Printf("%v\n", err)
 		return nil
