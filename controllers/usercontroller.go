@@ -97,6 +97,15 @@ func (c *UserController) GetUser() {
 			return
 		}
 	} else {
+		requestee, err := users.Get(requesteeId)
+		if err != nil {
+			c.Data["json"] = map[string]interface{}{
+				"result": "failed",
+				"error":  "failed to get user",
+			}
+			c.ServeJSON()
+			return
+		}
 		c.Data["json"] = map[string]interface{}{
 			"result": "success",
 			"data": map[string]string{
