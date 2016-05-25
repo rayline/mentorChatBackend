@@ -419,7 +419,7 @@ func (c *UserController) GetUserIdByMail() {
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
-			"error":  "No such mail : " + mail,
+			"error":  "No such mail : " + mail + err.Error(),
 		}
 		c.ServeJSON()
 		return
@@ -440,7 +440,7 @@ func (c *UserController) GetUserIdByName() {
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
-			"error":  "No such name :" + name,
+			"error":  "No such name :" + name + err.Error(),
 		}
 		c.ServeJSON()
 		return
