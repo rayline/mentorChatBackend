@@ -3,7 +3,6 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"io/ioutil"
-	"log"
 	"mentorChatBackend/models/files"
 	"mentorChatBackend/models/tokens"
 	"mentorChatBackend/models/types"
@@ -35,7 +34,7 @@ func (c *FileController) Prepare() {
 func (c *FileController) NewFile() {
 	file, _, err := c.GetFile("file")
 	if err != nil {
-		log.Printf("failed dealing with uploaded file : %v\n", err)
+		beego.Error("failed dealing with uploaded file : %v\n", err)
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
 			"error":  "failed to upload file",
@@ -44,7 +43,7 @@ func (c *FileController) NewFile() {
 	} else {
 		data, err := ioutil.ReadAll(file)
 		if err != nil {
-			log.Printf("failed dealing with uploaded file : %v\n", err)
+			beego.Error("failed dealing with uploaded file : %v\n", err)
 			c.Data["json"] = map[string]interface{}{
 				"result": "failed",
 				"error":  "failed to upload file",
@@ -73,7 +72,7 @@ func (c *FileController) RetrieveFile() {
 	}
 	data, err := files.GetFile(types.FileID_t(Id))
 	if err != nil {
-		log.Printf("failed dealing with retrieving file : %v\n", err)
+		beego.Error("failed dealing with retrieving file : %v\n", err)
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
 			"error":  "failed to retrieve file",

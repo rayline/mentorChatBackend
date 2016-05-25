@@ -5,7 +5,7 @@ import "github.com/garyburd/redigo/redis"
 import "fmt"
 import "encoding/json"
 import "strconv"
-import "log"
+import "github.com/astaxie/beego"
 
 func GetAll() ([]*User, error) {
 	conn := pool0.Get()

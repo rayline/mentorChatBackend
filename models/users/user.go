@@ -10,6 +10,7 @@ import "fmt"
 import "strconv"
 import "log"
 import "os"
+import "github.com/astaxie/beego"
 
 type User struct {
 	Id                      types.UserID_t
