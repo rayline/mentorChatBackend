@@ -9,7 +9,7 @@ import (
 
 func init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	f, err := os.OpenFile("dev/stderr", os.O_WRONLY, os.ModePerm)
+	f, err := os.OpenFile("/dev/stderr", os.O_WRONLY, os.ModePerm)
 	if err != nil {
 		log.Fatalln("Unable to create log file : ", err)
 	}

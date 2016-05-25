@@ -5,7 +5,7 @@ import "mentorChatBackend/models/types"
 type Permission uint
 
 const (
-	ALL         Permission = 2147483647
+	ALL         Permission = 10086
 	NONE        Permission = 0
 	SELF        Permission = 10
 	FRIEND      Permission = 5
