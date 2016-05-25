@@ -1,6 +1,5 @@
 package users
 
-import "github.com/astaxie/beego"
 import "mentorChatBackend/models/types"
 import "github.com/garyburd/redigo/redis"
 import "mentorChatBackend/models/consts"
@@ -64,7 +63,6 @@ func init() {
 }
 
 func (u *User) IsFriend(Id types.UserID_t) bool {
-	log.
 	conn := pool2.Get()
 	defer conn.Close()
 	is, err := redis.Bool(conn.Do("SISMEMBER", u.Id, Id))

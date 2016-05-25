@@ -1,11 +1,11 @@
 package users
 
-import "github.com/astaxie/beego"
 import "mentorChatBackend/models/types"
 import "github.com/garyburd/redigo/redis"
 import "fmt"
 import "encoding/json"
 import "strconv"
+import "log"
 
 func GetAll() ([]*User, error) {
 	conn := pool0.Get()
