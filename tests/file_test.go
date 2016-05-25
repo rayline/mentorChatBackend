@@ -3,7 +3,7 @@ package tests
 import (
 	"bytes"
 	"mentorChatBackend/models/files"
-	"mentorChatBackend/models/types"
+	//"mentorChatBackend/models/types"
 	"testing"
 )
 
