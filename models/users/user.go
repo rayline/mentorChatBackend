@@ -9,6 +9,7 @@ import "time"
 import "sync"
 import "fmt"
 import "strconv"
+import "log"
 
 type User struct {
 	Id                      types.UserID_t
@@ -63,11 +64,12 @@ func init() {
 }
 
 func (u *User) IsFriend(Id types.UserID_t) bool {
+	log.
 	conn := pool2.Get()
 	defer conn.Close()
 	is, err := redis.Bool(conn.Do("SISMEMBER", u.Id, Id))
 	if err != nil {
-		beego.BeeLogger.Error("%v\n", err)
+		log.Printf("%v\n", err)
 	}
 	return is
 }
@@ -77,7 +79,7 @@ func (u *User) AcceptAsFriend(Id types.UserID_t) {
 	defer conn.Close()
 	_, err := conn.Do("SADD", u.Id, Id)
 	if err != nil {
-		beego.BeeLogger.Error("%v\n", err)
+		log.Printf("%v\n", err)
 	}
 }
 
@@ -86,11 +88,11 @@ func (u *User) DeleteFriend(Id types.UserID_t) {
 	defer conn.Close()
 	_, err := conn.Do("SREM", u.Id, Id)
 	if err != nil {
-		beego.BeeLogger.Error("%v\n", err)
+		log.Printf("%v\n", err)
 	}
 	_, err = conn.Do("SREM", Id, u.Id)
 	if err != nil {
-		beego.BeeLogger.Error("%v\n", err)
+		log.Printf("%v\n", err)
 	}
 }
 
@@ -99,11 +101,11 @@ func (u *User) AddMESSAGE(MESSAGE types.Message_t) {
 	defer conn.Close()
 	data, err := json.Marshal(MESSAGE)
 	if err != nil {
-		beego.BeeLogger.Error("%v\n", err)
+		log.Printf("%v\n", err)
 		return
 	}
 	if _, err = conn.Do("LPUSH", data); err != nil {
-		beego.BeeLogger.Error("%v\n", err)
+		log.Printf("%v\n", err)
 	}
 }
 
@@ -179,18 +181,18 @@ func (u *User) GetMESSAGE() *types.Message_t {
 	} else if err == nil {
 		MESSAGEBytes, err := redis.Bytes(data[1], nil)
 		if err != nil {
-			beego.BeeLogger.Error("Failed to parse message returned : %v\n", err)
+			log.Printf("Failed to parse message returned : %v\n", err)
 			return nil
 		}
 		MESSAGE := types.Message_t{}
 		err = json.Unmarshal(MESSAGEBytes, &MESSAGE)
 		if err != nil {
-			beego.BeeLogger.Error("Failed to parse message returned : %v\n", err)
+			log.Printf("Failed to parse message returned : %v\n", err)
 			return nil
 		}
 		return &MESSAGE
 	} else {
-		beego.BeeLogger.Error("Failed to retrieve message : %v\n", err)
+		log.Printf("Failed to retrieve message : %v\n", err)
 		return nil
 	}
 }
@@ -200,7 +202,7 @@ func (u *User) GetFriendList() []types.UserID_t {
 	defer conn.Close()
 	Idstrings, err := redis.Strings(conn.Do("SMEMBERS", u.Id))
 	if err != nil {
-		beego.BeeLogger.Error("%v\n", err)
+		log.Printf("%v\n", err)
 		return nil
 	}
 	uList := []types.UserID_t{}

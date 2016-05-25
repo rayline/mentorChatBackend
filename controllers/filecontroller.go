@@ -34,7 +34,7 @@ func (c *FileController) Prepare() {
 func (c *FileController) NewFile() {
 	file, _, err := c.GetFile("file")
 	if err != nil {
-		beego.BeeLogger.Error("failed dealing with uploaded file : %v\n", err)
+		log.Printf("failed dealing with uploaded file : %v\n", err)
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
 			"error":  "failed to upload file",
@@ -43,7 +43,7 @@ func (c *FileController) NewFile() {
 	} else {
 		data, err := ioutil.ReadAll(file)
 		if err != nil {
-			beego.BeeLogger.Error("failed dealing with uploaded file : %v\n", err)
+			log.Printf("failed dealing with uploaded file : %v\n", err)
 			c.Data["json"] = map[string]interface{}{
 				"result": "failed",
 				"error":  "failed to upload file",
@@ -72,7 +72,7 @@ func (c *FileController) RetrieveFile() {
 	}
 	data, err := files.GetFile(types.FileID_t(Id))
 	if err != nil {
-		beego.BeeLogger.Error("failed dealing with retrieving file : %v\n", err)
+		log.Printf("failed dealing with retrieving file : %v\n", err)
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
 			"error":  "failed to retrieve file",

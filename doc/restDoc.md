@@ -59,7 +59,7 @@ and the failed one
 	}
 
 Caution : no comment should be included in JSON since it is not a JSON standard.  
-Caution1 : Do NOT be sensitive in case when Parsing JSON fields
+Caution1 : Do NOT be sensitive in case when Parsing JSON fields  
 DEBUG means that the api is only for debugging and should be deprecated when deployed.  
 BLOCK means that the api may not return immediately, specially used for blocking message model.  
 
