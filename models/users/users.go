@@ -147,6 +147,9 @@ func AllocUID() types.UserID_t {
 		defer conn.Close()
 		conn.Do("SET", "NEXTUID", nextUID)
 	}()
+	u := User{}
+	u.Id = nextUID
+	Set(nextUID, u)
 	return nextUID
 }
 
