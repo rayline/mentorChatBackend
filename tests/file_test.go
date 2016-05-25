@@ -13,8 +13,10 @@ func TestFile(t *testing.T) {
 	if fileid == "" {
 		t.Fatal("Failed to create file ID")
 	}
-	data := files.GetFile(fileid)
-	if string(data) != "TESTTESTTEST" {
+	data, err := files.GetFile(fileid)
+	if err != nil {
+		t.Fatal(err)
+	} else if string(data) != "TESTTESTTEST" {
 		t.Fatal("Failed to retrieve file but got : ", string(data))
 	}
 }
