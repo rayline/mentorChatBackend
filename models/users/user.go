@@ -2,7 +2,6 @@ package users
 
 import "mentorChatBackend/models/types"
 import "github.com/garyburd/redigo/redis"
-import "mentorChatBackend/models/consts"
 import "encoding/json"
 import "time"
 import "sync"
@@ -43,8 +42,8 @@ func newPool(server, password string, database int) *redis.Pool {
 
 var (
 	pool0, pool1, pool2, pool3, pool4 *redis.Pool
-	redisServer                                      = consts.RedisServer
-	redisPassword                                    = consts.RedisPassword
+	redisServer                                      = beego.AppConfig.String("RedisServer")
+	redisPassword                                    = beego.AppConfig.String("RedisPassword")
 	nextUID                           types.UserID_t = 1
 	UIDAllocMutex                     sync.Mutex
 )

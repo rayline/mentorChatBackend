@@ -76,3 +76,4 @@ $RECYCLE.BIN/
 
 # specially skipped
 default_test.go
+app.conf
