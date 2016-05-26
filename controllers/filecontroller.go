@@ -37,7 +37,7 @@ func (c *FileController) NewFile() {
 		beego.Error("failed dealing with uploaded file : %v\n", err)
 		c.Data["json"] = map[string]interface{}{
 			"result": "failed",
-			"error":  "failed to upload file",
+			"error":  "failed to recieve uploaded file: " + err.Error(),
 		}
 		c.ServeJSON()
 	} else {
@@ -46,7 +46,7 @@ func (c *FileController) NewFile() {
 			beego.Error("failed dealing with uploaded file : %v\n", err)
 			c.Data["json"] = map[string]interface{}{
 				"result": "failed",
-				"error":  "failed to upload file",
+				"error":  "failed to read uploaded file content : " + err.Error(),
 			}
 			c.ServeJSON()
 			return
