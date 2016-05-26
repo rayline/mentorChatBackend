@@ -44,7 +44,7 @@ func newPool(server, password string, database int) *redis.Pool {
 var (
 	pool0, pool1, pool2, pool3, pool4 *redis.Pool
 	redisServer                                      = consts.RedisServer
-	redisPassword                                    = consts.RdisPassword
+	redisPassword                                    = consts.RedisPassword
 	nextUID                           types.UserID_t = 1
 	UIDAllocMutex                     sync.Mutex
 )

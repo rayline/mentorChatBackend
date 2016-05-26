@@ -81,7 +81,7 @@ BLOCK means that the api may not return immediately, specially used for blocking
 	- GET returns the friend list of the user. fileds: "friendlist"(uint64[])
 	- POST changes the friend list of the user. fields: "behavior"(string, only "DELETE" and adding friends should be done with friendrequest) "friendlist"(uint64[])
 + /api/user/{userid}/friendrequest
-	- POST sends a friend request to the user (Attention, the request will be recieved through a MESSAGE). A user should also accept a friend request in requesting to be the other user's friend in this way. filed: "requesteeid"(uint64) "description"(string)
+	- POST sends a friend request to the user (Attention, the request will be recieved through a MESSAGE). A user should also accept a friend request in requesting to be the other user's friend in this way. filed: "message"(string)
 + /api/username/{username}
 	- GET returns the userid of the requested username. field: "userid"(uint64)
 + /api/usermail/{usermail}
