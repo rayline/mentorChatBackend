@@ -35,8 +35,8 @@ func TestTokens(t *testing.T) {
 
 	//logout test here
 	tokens.Delete(token)
-	_, err = tokens.Get(token)
+	uid3, err := tokens.Get(token)
 	if err != nil {
-		t.Fatal("Failed to delete token")
+		t.Fatal("Failed to delete token, got " + uid3)
 	}
 }
