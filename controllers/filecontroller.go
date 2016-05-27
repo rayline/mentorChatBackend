@@ -51,7 +51,14 @@ func (c *FileController) NewFile() {
 			c.ServeJSON()
 			return
 		}
-		fileid := files.NewFile(data)
+		fileid, err := files.NewFile(data)
+		if err != nil {
+			beego.Error("failed saving uploaded file : %v\n", err)
+			c.Data["json"] = map[string]interface{}{
+				"result": "failed",
+				"error":  "failed to write uploaded file content : " + err.Error(),
+			}
+		}
 		c.Data["json"] = map[string]interface{}{
 			"result": "success",
 			"data": map[string]string{

@@ -1,8 +1,9 @@
 package files
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"io/ioutil"
-	"log"
 	"math/rand"
 	"mentorChatBackend/models/types"
 	"os"
@@ -14,22 +15,11 @@ func GetFile(Id types.FileID_t) (data []byte, err error) {
 	return data, err
 }
 
-func NewFile(data []byte) types.FileID_t {
-	for Id := types.FileID_t(""); Id == ""; {
-		Id = types.FileID_t(types.FileID_t(randomString()))
-		os.MkdirAll("static/userfiles/", os.ModePerm)
-		f, err := os.OpenFile("static/userfiles/"+string(Id), os.O_CREATE|os.O_EXCL|os.O_WRONLY, os.ModePerm)
-		if err != nil {
-			if !os.IsExist(err) {
-				log.Println(err)
-			}
-			Id = ""
-		} else {
-			f.Write(data)
-			return Id
-		}
-	}
-	return ""
+func NewFile(data []byte) (types.FileID_t, error) {
+	hash := sha256.Sum256(data)
+	Id := types.FileID_t(hex.EncodeToString(hash[0:32]))
+	err := ioutil.WriteFile("static/userfiles/"+string(Id), data, os.ModePerm)
+	return Id, err
 }
 
 func randomString() string {

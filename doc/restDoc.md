@@ -67,6 +67,8 @@ BLOCK means that the api may not return immediately, specially used for blocking
 	- GET getting all user ID. Fileds: "userid"(uint64[])
 + /api/user/new
 	- GET allocating a new user id whose information is not set yet, and should be set before using. A token will also be returned so that caller will be able to set password. User id with no password set for time EMPTY_USER_LIFE (constant, in seconds) will be deprecated and returned to the id pool. filed: "userid"(uint64)
++ /api/user/login
+	- GET deactivate the current token so the user is logged out. The token will become unavailable. With no token causes errors.
 + /api/user/{userid}
 	- GET returns the information of the user. Content varies as permissions of user. Field names will be named the same as is in the defination of user. 
 	- POST setting user information, including password. Operation may be denied with low permission. If you don't wish to change a field, do not mention it, otherwise it will be cleared or result in other errors. Field names will be named the same as is in the defination of user. 
@@ -87,7 +89,7 @@ BLOCK means that the api may not return immediately, specially used for blocking
 + /api/usermail/{usermail}
 	- GET returns the userid of the requested usermail. field: "userid"(uint64)
 + /api/file/new
-	- POST upload a new file, in the way of multipart. field: "file"(multipart). Returns the file id for future use. field: "fileid"(uint64)
+	- POST upload a new file, in the way of multipart. field: "file"(multipart). Returns the file id for future use. field: "fileid"(uint64) Caution: This is not a server designed for heavy file transferring, and do not upload too big files.
 + /api/file/{fileid}
 	- GET returns the file, in common raw file, not a multipart.
 

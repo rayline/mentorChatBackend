@@ -31,6 +31,29 @@ func (c *UserController) Prepare() {
 	}
 }
 
+func (c *UserController) LogoutUser() {
+	TokenString := c.Ctx.GetCookie("token")
+	if TokenString == "" {
+		c.Data["json"] = map[string]interface{}{
+			"result": "failed",
+			"error":  "No token provided",
+		}
+		c.ServeJSON()
+	} else {
+		tokenuint, err := strconv.ParseUint(TokenString, 10, 64)
+		if err != nil {
+			return
+		}
+		token := types.TokenID_t(tokenuint)
+		tokens.Delete(token)
+		c.Data["json"] = map[string]interface{}{
+			"result": "success",
+		}
+		c.ServeJSON()
+		return
+	}
+}
+
 func (c *UserController) AllUsers() {
 	if beego.AppConfig.String("runmode") == "dev" {
 		if data, err := users.GetAllUserId(); err != nil {

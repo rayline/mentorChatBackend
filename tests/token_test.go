@@ -32,4 +32,11 @@ func TestTokens(t *testing.T) {
 	if uid2 != uid {
 		t.Fatal("Failed to retrieve token")
 	}
+
+	//logout test here
+	tokens.Delete(token)
+	_, err := tokens.Get(token)
+	if err != nil {
+		t.Fatal("Failed to delete token")
+	}
 }

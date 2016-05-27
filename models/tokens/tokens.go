@@ -46,3 +46,10 @@ func Get(Id types.TokenID_t) (types.UserID_t, error) {
 	}
 	return t.Id, nil
 }
+
+func Delete(Id types.TokenID_t) {
+	tokenMutex.RLock()
+	defer tokenMutex.RUnlock()
+	delete(tokenMap[Id])
+	return
+}

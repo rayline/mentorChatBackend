@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"S",
+				"String	string ƒ"
+			],
+			[
+				"G",
+				"GetConfig	value interface{}, err error ƒ"
+			],
+			[
 				"CR",
 				"O_CREATE	 Ɩ"
 			],
@@ -22,10 +30,6 @@
 			[
 				"req",
 				"requesteeId	types.UserID_t ν"
-			],
-			[
-				"S",
-				"Sprintf	string ƒ"
 			],
 			[
 				"uid",
@@ -74,10 +78,6 @@
 			[
 				"Fa",
 				"Fatal	 ƒ"
-			],
-			[
-				"G",
-				"GetByName	*users.User, error ƒ"
 			],
 			[
 				"F",
@@ -520,10 +520,13 @@
 	"buffers":
 	[
 		{
+			"contents": "package controllers\n\nimport (\n	\"github.com/astaxie/beego\"\n	\"io/ioutil\"\n	\"mentorChatBackend/models/files\"\n	\"mentorChatBackend/models/tokens\"\n	\"mentorChatBackend/models/types\"\n	\"mime\"\n	\"strconv\"\n)\n\ntype FileController struct {\n	beego.Controller\n}\n\nfunc (c *FileController) Prepare() {\n	TokenString := c.Ctx.GetCookie(\"token\")\n	if TokenString == \"\" {\n		return\n	} else {\n		tokenuint, err := strconv.ParseUint(TokenString, 16, 64)\n		if err != nil {\n			return\n		}\n		token := types.TokenID_t(tokenuint)\n		uid, err := tokens.Get(token)\n		if err != nil {\n			return\n		}\n		c.Data[\"userid\"] = uid\n	}\n}\n\nfunc (c *FileController) NewFile() {\n	file, _, err := c.GetFile(\"file\")\n	if err != nil {\n		beego.Error(\"failed dealing with uploaded file : %v\\n\", err)\n		c.Data[\"json\"] = map[string]interface{}{\n			\"result\": \"failed\",\n			\"error\":  \"failed to recieve uploaded file: \" + err.Error(),\n		}\n		c.ServeJSON()\n	} else {\n		data, err := ioutil.ReadAll(file)\n		if err != nil {\n			beego.Error(\"failed dealing with uploaded file : %v\\n\", err)\n			c.Data[\"json\"] = map[string]interface{}{\n				\"result\": \"failed\",\n				\"error\":  \"failed to read uploaded file content : \" + err.Error(),\n			}\n			c.ServeJSON()\n			return\n		}\n		fileid := files.NewFile(data)\n		c.Data[\"json\"] = map[string]interface{}{\n			\"result\": \"success\",\n			\"data\": map[string]string{\n				\"fileid\": string(fileid),\n			},\n		}\n		c.ServeJSON()\n	}\n}\n\nfunc (c *FileController) RetrieveFile() {\n	Id := c.Ctx.Input.Param(\":fileid\")\n	if Id == \"\" {\n		c.Data[\"json\"] = map[string]interface{}{\n			\"result\": \"failed\",\n			\"error\":  \"No fileid input\",\n		}\n	}\n	data, err := files.GetFile(types.FileID_t(Id))\n	if err != nil {\n		beego.Error(\"failed dealing with retrieving file : %v\\n\", err)\n		c.Data[\"json\"] = map[string]interface{}{\n			\"result\": \"failed\",\n			\"error\":  \"failed to retrieve file\",\n		}\n	}\n	mime.t\n	c.Ctx.ResponseWriter.Write(data)\n}\n",
 			"file": "controllers/filecontroller.go",
+			"file_size": 1947,
+			"file_write_time": 131087257140349212,
 			"settings":
 			{
-				"buffer_size": 1802,
+				"buffer_size": 1872,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,7 +534,7 @@
 			"file": ".gitignore",
 			"settings":
 			{
-				"buffer_size": 991,
+				"buffer_size": 1000,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,7 +550,7 @@
 			"file": "doc/restDoc.md",
 			"settings":
 			{
-				"buffer_size": 6359,
+				"buffer_size": 6434,
 				"line_ending": "Windows"
 			}
 		},
@@ -603,7 +606,7 @@
 			"file": "models/users/user.go",
 			"settings":
 			{
-				"buffer_size": 5437,
+				"buffer_size": 5479,
 				"line_ending": "Windows"
 			}
 		},
@@ -611,7 +614,7 @@
 			"file": "models/users/users.go",
 			"settings":
 			{
-				"buffer_size": 4233,
+				"buffer_size": 4266,
 				"line_ending": "Windows"
 			}
 		},
@@ -624,10 +627,13 @@
 			}
 		},
 		{
-			"file": "models/consts/dbconst.go",
+			"contents": "appname = mentorChatBackend\nhttpport = 8080\nrunmode = dev\nRedisServer = 127.0.0.1:6379\nRedisPassword = RedisPassword",
+			"file": "conf/app.conf",
+			"file_size": 120,
+			"file_write_time": 131087231319109188,
 			"settings":
 			{
-				"buffer_size": 91,
+				"buffer_size": 116,
 				"line_ending": "Windows"
 			}
 		},
@@ -667,7 +673,7 @@
 			"file": "controllers/usercontroller.go",
 			"settings":
 			{
-				"buffer_size": 10817,
+				"buffer_size": 11199,
 				"line_ending": "Windows"
 			}
 		}
@@ -785,7 +791,6 @@
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/conf",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/controllers",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models",
-		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/consts",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/files",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/tokens",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/types",
@@ -797,6 +802,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/consts/dbconst.go",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/spectest.go",
 		"/C/Users/rayline/OneDrive/document/code/buaa76/c.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa76/b.cpp",
@@ -923,8 +929,7 @@
 		"/C/Users/rayline/OneDrive/document/code/buaa210/c.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa210/d.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa61/a.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa61/c.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa61/d.cpp"
+		"/C/Users/rayline/OneDrive/document/code/buaa61/c.cpp"
 	],
 	"find":
 	{
@@ -944,6 +949,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SendFriendRequest",
+			"log.Printf",
 			"Do",
 			"Setmail",
 			"Getuser",
@@ -1069,9 +1076,7 @@
 			"fmt.println(bs",
 			"resp, err",
 			"resp, _ := client.Do(req)",
-			"resp, err := client.Do(req)",
-			" a",
-			"b.Reset()"
+			"resp, err := client.Do(req)"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1079,6 +1084,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"beego.Error",
 			"log.Printf"
 		],
 		"reverse": false,
@@ -1090,7 +1096,7 @@
 	"groups":
 	[
 		{
-			"selected": 11,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -1099,15 +1105,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1802,
+						"buffer_size": 1872,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								190,
-								190
+								1835,
+								1835
 							]
 						],
 						"settings":
@@ -1116,10 +1122,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1728.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1128,15 +1134,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 991,
+						"buffer_size": 1000,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								991,
-								991
+								1000,
+								1000
 							]
 						],
 						"settings":
@@ -1144,10 +1150,10 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2344.0,
+						"translation.y": 2580.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 18,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -1163,8 +1169,8 @@
 						"selection":
 						[
 							[
-								88,
-								88
+								808,
+								825
 							]
 						],
 						"settings":
@@ -1173,10 +1179,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 216.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 17,
 					"type": "text"
 				},
 				{
@@ -1185,15 +1191,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6359,
+						"buffer_size": 6434,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3010,
-								3010
+								5679,
+								5679
 							]
 						],
 						"settings":
@@ -1202,10 +1208,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 208.0,
+						"translation.y": 3448.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 17,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -1234,7 +1240,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1263,7 +1269,7 @@
 						"translation.y": 864.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 18,
 					"type": "text"
 				},
 				{
@@ -1292,7 +1298,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1320,7 +1326,7 @@
 						"translation.y": 856.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1346,10 +1352,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 108.0,
+						"translation.y": 64.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 16,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1379,7 +1385,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1388,15 +1394,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5437,
+						"buffer_size": 5479,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1821,
-								1821
+								1103,
+								1116
 							]
 						],
 						"settings":
@@ -1405,10 +1411,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2916.0,
+						"translation.y": 1080.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -1417,15 +1423,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4233,
+						"buffer_size": 4266,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1483,
-								1473
+								183,
+								149
 							]
 						],
 						"settings":
@@ -1434,10 +1440,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1792.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -1453,8 +1459,8 @@
 						"selection":
 						[
 							[
-								84,
-								84
+								114,
+								114
 							]
 						],
 						"settings":
@@ -1466,36 +1472,35 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 14,
 					"type": "text"
 				},
 				{
 					"buffer": 13,
-					"file": "models/consts/dbconst.go",
+					"file": "conf/app.conf",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 91,
+						"buffer_size": 116,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								59,
-								59
+								116,
+								116
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1522,10 +1527,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 108.0,
+						"translation.y": 40.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
@@ -1583,7 +1588,7 @@
 						"translation.y": 604.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
@@ -1612,7 +1617,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
@@ -1621,15 +1626,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10817,
+						"buffer_size": 11199,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3984,
-								3987
+								5411,
+								5418
 							]
 						],
 						"settings":
@@ -1638,10 +1643,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 496.0,
+						"translation.y": 7444.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 16,
 					"type": "text"
 				}
 			]
