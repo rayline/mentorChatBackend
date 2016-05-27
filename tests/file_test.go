@@ -9,8 +9,8 @@ import (
 
 func TestFile(t *testing.T) {
 	buffer := bytes.NewBufferString("TESTTESTTEST")
-	fileid := files.NewFile(buffer.Bytes())
-	if fileid == "" {
+	fileid, err := files.NewFile(buffer.Bytes())
+	if fileid == "" || err != nil {
 		t.Fatal("Failed to create file ID")
 	}
 	data, err := files.GetFile(fileid)

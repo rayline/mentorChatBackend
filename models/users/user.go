@@ -49,6 +49,12 @@ var (
 )
 
 func init() {
+	if redisServer == "" {
+		redisServer = "127.0.0.1:6379"
+	}
+	if redisPassword == "" {
+		redisPassword = "RedisPasswordMENTORpassw0rd"
+	}
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	f, err := os.OpenFile("mentorChatUSERS.log", os.O_CREATE|os.O_WRONLY, os.ModePerm)
 	if err != nil {
