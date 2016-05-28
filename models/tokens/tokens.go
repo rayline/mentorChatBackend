@@ -4,6 +4,7 @@ import "time"
 import "mentorChatBackend/models/types"
 import "sync"
 import "fmt"
+import "math/rand"
 
 type token struct {
 	Id       types.UserID_t
@@ -27,8 +28,14 @@ func NewToken(Id types.UserID_t) types.TokenID_t {
 	t := new(token)
 	t.Id = Id
 	t.lastUsed = time.Now()
-	tokenCnt++
-	tid := tokenCnt
+	token := uint64(0)
+	for token == 0 {
+		token = uint64(rand.Int63())
+		if _, exist := tokenMap[types.TokenID_t(token)]; exist == true {
+			token = 0
+		}
+	}
+	tid := types.TokenID_t(token)
 	tokenMap[tid] = t
 	return tid
 }
