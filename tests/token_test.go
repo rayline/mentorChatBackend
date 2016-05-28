@@ -37,6 +37,6 @@ func TestTokens(t *testing.T) {
 	tokens.Delete(token)
 	uid3, err := tokens.Get(token)
 	if err != nil {
-		t.Fatal("Failed to delete token, got " + uid3)
+		t.Fatal("Failed to delete token, got ", uid3)
 	}
 }
