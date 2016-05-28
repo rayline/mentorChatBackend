@@ -51,6 +51,8 @@ func Get(Id types.TokenID_t) (types.UserID_t, error) {
 	if t.lastUsed.Add(TOKEN_SILENT_LIFE).Before(time.Now()) {
 		return 0, fmt.Errorf("Token: Token ID %d is expired", Id)
 	}
+	t.lastUsed = time.Now()
+	tokenMap[Id] = t
 	return t.Id, nil
 }
 
