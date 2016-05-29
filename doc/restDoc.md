@@ -89,7 +89,8 @@ BLOCK means that the api may not return immediately, specially used for blocking
 + /api/usermail/{usermail}
 	- GET returns the userid of the requested usermail. field: "userid"(uint64)
 + /api/file/new
-	- POST upload a new file, in the way of multipart. field: "file"(multipart). Returns the file id for future use. field: "fileid"(uint64) Caution: This is not a server designed for heavy file transferring, and do not upload too big files.
+	- POST upload a new file, in the way of multipart. field: "file"(multipart). Returns the file id for future use. field: "fileid"(uint64) Caution: This is not a server designed for heavy file transferring, and do not upload too big files. 
+	- UPDATED in 0.1.1, fileid is now hash of file, which is unique for each file.
 + /api/file/{fileid}
 	- GET returns the file, in common raw file, not a multipart.
 
