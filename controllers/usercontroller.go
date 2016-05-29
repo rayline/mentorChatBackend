@@ -231,6 +231,8 @@ func (c *UserController) LoginUser() {
 		c.ServeJSON()
 		return
 	}
+	token := tokens.NewToken(requesteeId)
+	c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 10))
 	c.Data["json"] = map[string]interface{}{
 		"result": "success",
 	}
