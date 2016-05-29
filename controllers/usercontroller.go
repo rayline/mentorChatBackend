@@ -18,7 +18,7 @@ func (c *UserController) Prepare() {
 	if TokenString == "" {
 		return
 	} else {
-		tokenuint, err := strconv.ParseUint(TokenString, 10, 64)
+		tokenuint, err := strconv.ParseUint(TokenString, 16, 64)
 		if err != nil {
 			return
 		}
@@ -40,7 +40,7 @@ func (c *UserController) LogoutUser() {
 		}
 		c.ServeJSON()
 	} else {
-		tokenuint, err := strconv.ParseUint(TokenString, 10, 64)
+		tokenuint, err := strconv.ParseUint(TokenString, 16, 64)
 		if err != nil {
 			return
 		}
@@ -217,7 +217,7 @@ func (c *UserController) LoginUser() {
 		return
 	}
 	if requestee.Validate(types.Password_t(passwordStr)) {
-		c.Ctx.SetCookie("token", string(tokens.NewToken(requestee.Id)))
+		c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 16))
 		c.Data["json"] = map[string]interface{}{
 			"result": "success",
 		}
@@ -232,10 +232,10 @@ func (c *UserController) LoginUser() {
 		return
 	}
 	token := tokens.NewToken(requesteeId)
-	c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 10))
 	c.Data["json"] = map[string]interface{}{
 		"result": "success",
 	}
+	c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 16))
 	c.ServeJSON()
 	return
 }
@@ -249,7 +249,7 @@ func (c *UserController) NewUser() {
 		},
 	}
 	token := tokens.NewToken(Id)
-	c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 10))
+	c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 16))
 	c.ServeJSON()
 }
 
