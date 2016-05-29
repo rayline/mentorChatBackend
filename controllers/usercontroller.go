@@ -217,10 +217,11 @@ func (c *UserController) LoginUser() {
 		return
 	}
 	if requestee.Validate(types.Password_t(passwordStr)) {
-		c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 16))
+		token := tokens.NewToken(requesteeId)
 		c.Data["json"] = map[string]interface{}{
 			"result": "success",
 		}
+		c.Ctx.SetCookie("token", strconv.FormatUint(uint64(token), 16))
 		c.ServeJSON()
 		return
 	} else {
