@@ -4,8 +4,64 @@
 		"selected_items":
 		[
 			[
+				"t",
+				"TIME"
+			],
+			[
+				"dis",
+				"distance"
+			],
+			[
+				"be",
+				"begin"
+			],
+			[
+				"req",
+				"requesteeId	types.UserID_t ν"
+			],
+			[
+				"is",
+				"isPrime	bool ƒ"
+			],
+			[
 				"S",
-				"String	string ƒ"
+				"Sqrt	float64 ƒ"
+			],
+			[
+				"fun",
+				"func main	func main {...} ʂ"
+			],
+			[
+				"I",
+				"Int63	int64 ƒ"
+			],
+			[
+				"uid",
+				"uid3	types.UserID_t ν"
+			],
+			[
+				"redis",
+				"redisPassword	string ν"
+			],
+			[
+				"red",
+				"redisServer	string ν"
+			],
+			[
+				"A",
+				"AllocUID	types.UserID_t ƒ"
+			],
+			[
+				"Serve",
+				"ServeJSON	 ƒ"
+			],
+			[
+				"toke",
+				"tokenMap	map[types.TokenID_t]*token ν"
+			],
+			[
+				"Mod",
+				"ModePerm	 Ɩ"
 			],
 			[
 				"G",
@@ -26,14 +82,6 @@
 			[
 				"O",
 				"OpenFile	*os.File, error ƒ"
-			],
-			[
-				"req",
-				"requesteeId	types.UserID_t ν"
-			],
-			[
-				"uid",
-				"uid2	types.UserID_t ν"
 			],
 			[
 				"tok",
@@ -66,14 +114,6 @@
 			[
 				"ne",
 				"nextUID	types.UserID_t ν"
-			],
-			[
-				"I",
-				"Id	types.UserID_t ν"
-			],
-			[
-				"A",
-				"AcceptAsFriend	 ƒ"
 			],
 			[
 				"Fa",
@@ -220,10 +260,6 @@
 				"GetFiles	[]*multipart.FileHeader, error ƒ"
 			],
 			[
-				"fun",
-				"func	Function"
-			],
-			[
 				"Us",
 				"UserMessage	 Ɩ"
 			],
@@ -368,10 +404,6 @@
 				"BigInteger"
 			],
 			[
-				"be",
-				"best"
-			],
-			[
 				"bes",
 				"bestLen"
 			],
@@ -406,10 +438,6 @@
 			[
 				"i",
 				"init	func init() ʂ"
-			],
-			[
-				"t",
-				"TplName	string ν"
 			],
 			[
 				"te",
@@ -486,47 +514,16 @@
 			[
 				"num",
 				"numOfZero"
-			],
-			[
-				"expre",
-				"expressionToParse"
-			],
-			[
-				"ex",
-				"expressionToParse"
-			],
-			[
-				"fo",
-				"for	For Loop"
-			],
-			[
-				"pu",
-				"push_back"
-			],
-			[
-				"del",
-				"delNext"
-			],
-			[
-				"r",
-				"rson"
-			],
-			[
-				"cl",
-				"clearList"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "package controllers\n\nimport (\n	\"github.com/astaxie/beego\"\n	\"io/ioutil\"\n	\"mentorChatBackend/models/files\"\n	\"mentorChatBackend/models/tokens\"\n	\"mentorChatBackend/models/types\"\n	\"mime\"\n	\"strconv\"\n)\n\ntype FileController struct {\n	beego.Controller\n}\n\nfunc (c *FileController) Prepare() {\n	TokenString := c.Ctx.GetCookie(\"token\")\n	if TokenString == \"\" {\n		return\n	} else {\n		tokenuint, err := strconv.ParseUint(TokenString, 16, 64)\n		if err != nil {\n			return\n		}\n		token := types.TokenID_t(tokenuint)\n		uid, err := tokens.Get(token)\n		if err != nil {\n			return\n		}\n		c.Data[\"userid\"] = uid\n	}\n}\n\nfunc (c *FileController) NewFile() {\n	file, _, err := c.GetFile(\"file\")\n	if err != nil {\n		beego.Error(\"failed dealing with uploaded file : %v\\n\", err)\n		c.Data[\"json\"] = map[string]interface{}{\n			\"result\": \"failed\",\n			\"error\":  \"failed to recieve uploaded file: \" + err.Error(),\n		}\n		c.ServeJSON()\n	} else {\n		data, err := ioutil.ReadAll(file)\n		if err != nil {\n			beego.Error(\"failed dealing with uploaded file : %v\\n\", err)\n			c.Data[\"json\"] = map[string]interface{}{\n				\"result\": \"failed\",\n				\"error\":  \"failed to read uploaded file content : \" + err.Error(),\n			}\n			c.ServeJSON()\n			return\n		}\n		fileid := files.NewFile(data)\n		c.Data[\"json\"] = map[string]interface{}{\n			\"result\": \"success\",\n			\"data\": map[string]string{\n				\"fileid\": string(fileid),\n			},\n		}\n		c.ServeJSON()\n	}\n}\n\nfunc (c *FileController) RetrieveFile() {\n	Id := c.Ctx.Input.Param(\":fileid\")\n	if Id == \"\" {\n		c.Data[\"json\"] = map[string]interface{}{\n			\"result\": \"failed\",\n			\"error\":  \"No fileid input\",\n		}\n	}\n	data, err := files.GetFile(types.FileID_t(Id))\n	if err != nil {\n		beego.Error(\"failed dealing with retrieving file : %v\\n\", err)\n		c.Data[\"json\"] = map[string]interface{}{\n			\"result\": \"failed\",\n			\"error\":  \"failed to retrieve file\",\n		}\n	}\n	mime.t\n	c.Ctx.ResponseWriter.Write(data)\n}\n",
 			"file": "controllers/filecontroller.go",
-			"file_size": 1947,
-			"file_write_time": 131087257140349212,
 			"settings":
 			{
-				"buffer_size": 1872,
+				"buffer_size": 2086,
 				"line_ending": "Windows"
 			}
 		},
@@ -542,7 +539,7 @@
 			"file": "routers/router.go",
 			"settings":
 			{
-				"buffer_size": 1184,
+				"buffer_size": 1267,
 				"line_ending": "Unix"
 			}
 		},
@@ -550,7 +547,55 @@
 			"file": "doc/restDoc.md",
 			"settings":
 			{
-				"buffer_size": 6434,
+				"buffer_size": 6660,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/rayline/OneDrive/document/code/buaa79/dij.cpp",
+			"settings":
+			{
+				"buffer_size": 1139,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/rayline/OneDrive/document/code/buaa79/a.cpp",
+			"settings":
+			{
+				"buffer_size": 2219,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/rayline/OneDrive/document/code/buaa79/f.cpp",
+			"settings":
+			{
+				"buffer_size": 1386,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/rayline/OneDrive/document/code/buaa79/e.cpp",
+			"settings":
+			{
+				"buffer_size": 1114,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/rayline/OneDrive/document/code/buaa79/c.cpp",
+			"settings":
+			{
+				"buffer_size": 1088,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/rayline/OneDrive/document/code/buaa79/g.cpp",
+			"settings":
+			{
+				"buffer_size": 178,
 				"line_ending": "Windows"
 			}
 		},
@@ -574,7 +619,7 @@
 			"file": "tests/token_test.go",
 			"settings":
 			{
-				"buffer_size": 666,
+				"buffer_size": 809,
 				"line_ending": "Windows"
 			}
 		},
@@ -590,7 +635,7 @@
 			"file": "models/files/files.go",
 			"settings":
 			{
-				"buffer_size": 817,
+				"buffer_size": 639,
 				"line_ending": "Windows"
 			}
 		},
@@ -598,7 +643,7 @@
 			"file": "tests/file_test.go",
 			"settings":
 			{
-				"buffer_size": 476,
+				"buffer_size": 495,
 				"line_ending": "Windows"
 			}
 		},
@@ -606,7 +651,7 @@
 			"file": "models/users/user.go",
 			"settings":
 			{
-				"buffer_size": 5479,
+				"buffer_size": 5616,
 				"line_ending": "Windows"
 			}
 		},
@@ -627,10 +672,7 @@
 			}
 		},
 		{
-			"contents": "appname = mentorChatBackend\nhttpport = 8080\nrunmode = dev\nRedisServer = 127.0.0.1:6379\nRedisPassword = RedisPassword",
 			"file": "conf/app.conf",
-			"file_size": 120,
-			"file_write_time": 131087231319109188,
 			"settings":
 			{
 				"buffer_size": 116,
@@ -657,7 +699,7 @@
 			"file": "models/tokens/tokens.go",
 			"settings":
 			{
-				"buffer_size": 960,
+				"buffer_size": 1295,
 				"line_ending": "Windows"
 			}
 		},
@@ -665,7 +707,15 @@
 			"file": "controllers/default.go",
 			"settings":
 			{
-				"buffer_size": 242,
+				"buffer_size": 171,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/index.tpl",
+			"settings":
+			{
+				"buffer_size": 133,
 				"line_ending": "Unix"
 			}
 		},
@@ -673,7 +723,7 @@
 			"file": "controllers/usercontroller.go",
 			"settings":
 			{
-				"buffer_size": 11199,
+				"buffer_size": 11832,
 				"line_ending": "Windows"
 			}
 		}
@@ -802,11 +852,13 @@
 	],
 	"file_history":
 	[
+		"/C/Users/rayline/OneDrive/document/code/buaa77/c.cpp",
+		"/C/Users/rayline/OneDrive/document/code/buaa77/b.cpp",
+		"/C/Users/rayline/OneDrive/document/code/lycprime/lycprime.go",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/consts/dbconst.go",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/spectest.go",
 		"/C/Users/rayline/OneDrive/document/code/buaa76/c.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa76/b.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa77/c.cpp",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/users/users.go",
 		"/C/Users/rayline/OneDrive/document/go/src/mentorChatBackend/models/permissions/permissions.go",
 		"/C/Users/rayline/OneDrive/document/code/bdStar2B/f.cpp",
@@ -927,9 +979,7 @@
 		"/C/Users/rayline/OneDrive/document/code/buaa210/a.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa210/b.cpp",
 		"/C/Users/rayline/OneDrive/document/code/buaa210/c.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa210/d.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa61/a.cpp",
-		"/C/Users/rayline/OneDrive/document/code/buaa61/c.cpp"
+		"/C/Users/rayline/OneDrive/document/code/buaa210/d.cpp"
 	],
 	"find":
 	{
@@ -949,6 +999,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"%I64d",
+			"}\n",
+			"time",
 			"SendFriendRequest",
 			"log.Printf",
 			"Do",
@@ -1073,10 +1126,7 @@
 			"showd",
 			"showde",
 			"showdetail",
-			"fmt.println(bs",
-			"resp, err",
-			"resp, _ := client.Do(req)",
-			"resp, err := client.Do(req)"
+			"fmt.println(bs"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1096,7 +1146,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -1105,15 +1155,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1872,
+						"buffer_size": 2086,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1835,
-								1835
+								1344,
+								1344
 							]
 						],
 						"settings":
@@ -1122,10 +1172,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1728.0,
+						"translation.y": 972.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1150,10 +1200,10 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2580.0,
+						"translation.y": 132.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 24,
 					"type": "text"
 				},
 				{
@@ -1162,15 +1212,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1184,
+						"buffer_size": 1267,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								808,
-								825
+								444,
+								444
 							]
 						],
 						"settings":
@@ -1182,7 +1232,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 17,
+					"stack_index": 14,
 					"type": "text"
 				},
 				{
@@ -1191,15 +1241,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6434,
+						"buffer_size": 6660,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5679,
-								5679
+								5989,
+								5989
 							]
 						],
 						"settings":
@@ -1208,14 +1258,185 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3448.0,
+						"translation.y": 3124.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/rayline/OneDrive/document/code/buaa79/dij.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1139,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								754,
+								754
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 864.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/rayline/OneDrive/document/code/buaa79/a.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2219,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								2219
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1620.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
+					"file": "/C/Users/rayline/OneDrive/document/code/buaa79/f.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1386,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								1386
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1089.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/rayline/OneDrive/document/code/buaa79/e.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1114,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								1114
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 648.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/C/Users/rayline/OneDrive/document/code/buaa79/c.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1088,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								999,
+								999
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1080.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/C/Users/rayline/OneDrive/document/code/buaa79/g.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 178,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								178
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
 					"file": "tests/default_test.go",
 					"semi_transient": false,
 					"settings":
@@ -1240,11 +1461,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 20,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 11,
 					"file": "tests/user_test.go",
 					"semi_transient": false,
 					"settings":
@@ -1256,8 +1477,8 @@
 						"selection":
 						[
 							[
-								894,
-								547
+								4291,
+								4291
 							]
 						],
 						"settings":
@@ -1266,27 +1487,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 864.0,
+						"translation.y": 6988.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 18,
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 12,
 					"file": "tests/token_test.go",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 666,
+						"buffer_size": 809,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								133,
-								133
+								434,
+								434
 							]
 						],
 						"settings":
@@ -1298,11 +1519,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 13,
 					"file": "doc/dbDoc.md",
 					"semi_transient": false,
 					"settings":
@@ -1326,112 +1547,24 @@
 						"translation.y": 856.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "models/files/files.go",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 817,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								673,
-								673
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 64.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "tests/file_test.go",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 476,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								116,
-								116
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "models/users/user.go",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5479,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1103,
-								1116
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1080.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "models/users/users.go",
+					"buffer": 14,
+					"file": "models/files/files.go",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4266,
+						"buffer_size": 639,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								183,
-								149
+								23,
+								23
 							]
 						],
 						"settings":
@@ -1447,7 +1580,95 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 15,
+					"file": "tests/file_test.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								272,
+								272
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 21,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "models/users/user.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5616,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1628,
+								1628
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1296.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "models/users/users.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4266,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								706,
+								706
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
 					"file": "mentorChatBackend.go",
 					"semi_transient": false,
 					"settings":
@@ -1472,11 +1693,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 22,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 19,
 					"file": "conf/app.conf",
 					"semi_transient": false,
 					"settings":
@@ -1489,7 +1710,7 @@
 						[
 							[
 								116,
-								116
+								103
 							]
 						],
 						"settings":
@@ -1500,11 +1721,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 23,
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 20,
 					"file": "models/users/permissions.go",
 					"semi_transient": false,
 					"settings":
@@ -1530,11 +1751,11 @@
 						"translation.y": 40.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 25,
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 21,
 					"file": "models/types/types.go",
 					"semi_transient": false,
 					"settings":
@@ -1559,24 +1780,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 19,
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 22,
 					"file": "models/tokens/tokens.go",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 960,
+						"buffer_size": 1295,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								936,
-								936
+								910,
+								910
 							]
 						],
 						"settings":
@@ -1585,27 +1806,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 604.0,
+						"translation.y": 1288.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 23,
 					"file": "controllers/default.go",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 242,
+						"buffer_size": 171,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								57,
-								57
+								143,
+								143
 							]
 						],
 						"settings":
@@ -1617,24 +1838,54 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 18,
 					"type": "text"
 				},
 				{
-					"buffer": 18,
-					"file": "controllers/usercontroller.go",
+					"buffer": 24,
+					"file": "views/index.tpl",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11199,
+						"buffer_size": 133,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5411,
-								5418
+								133,
+								133
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "controllers/usercontroller.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11832,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5207,
+								5207
 							]
 						],
 						"settings":
@@ -1643,10 +1894,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7444.0,
+						"translation.y": 7264.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 16,
+					"stack_index": 10,
 					"type": "text"
 				}
 			]
@@ -1695,6 +1946,10 @@
 	{
 		"height": 228.0
 	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\buaa79":
+	{
+		"height": 228.0
+	},
 	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\dayetest":
 	{
 		"height": 228.0
@@ -1708,6 +1963,10 @@
 		"height": 228.0
 	},
 	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\kmp":
+	{
+		"height": 228.0
+	},
+	"output.9o://C:\\Users\\rayline\\OneDrive\\document\\code\\lycprime":
 	{
 		"height": 228.0
 	},
@@ -1835,7 +2094,7 @@
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "Packages/GoSublime/GoSublime.sublime-build",
+	"pinned_build_system": "Packages/C++/C++ Single File.sublime-build",
 	"project": "mentorChatBackend.sublime-project",
 	"replace":
 	{
