@@ -67,29 +67,121 @@ BLOCK means that the api may not return immediately, specially used for blocking
 	- GET getting all user ID. Fileds: "userid"(uint64[])
 + /api/user/new
 	- GET allocating a new user id whose information is not set yet, and should be set before using. A token will also be returned so that caller will be able to set password. User id with no password set for time EMPTY_USER_LIFE (constant, in seconds) will be deprecated and returned to the id pool. filed: "userid"(uint64)
+
+		{
+			"data":{
+				"userid": 16
+			},
+			"result": "success"
+		}
+
 + /api/user/login
 	- GET deactivate the current token so the user is logged out. The token will become unavailable. With no token causes errors.
+
+		{
+			"result": "success"
+		}
+
 + /api/user/{userid}
 	- GET returns the information of the user. Content varies as permissions of user. Field names will be named the same as is in the defination of user. 
+
+		{
+			"data":{
+				"Description": "Nothing important",
+				"Mail": "wangyiru@wyr.com",
+				"Name": "WYR"
+			},
+			"result": "success"
+		}
+
 	- POST setting user information, including password. Operation may be denied with low permission. If you don't wish to change a field, do not mention it, otherwise it will be cleared or result in other errors. Field names will be named the same as is in the defination of user. 
+
+		{
+			"result": "success"
+		}
+
 + /api/user/{userid}/login
 	- POST with the right password, a token indicating the user will be set as cookie. filed: "password"(string)
+
+		{
+			"result": "success"
+		}
+
 + /api/user/{userid}/resetpassword
 	- POST a mail will be sent to the user's mail address to set password. The mail will include a token which will can reset password of the user (with /api/user/{userid} POST). NOT TO BE IMPLEMENTED THIS VERSION
 + /api/user/{userid}/messsage
 	- POST sends a message to a user. fileds: "message"(string)
+
+		{
+			"result": "success"
+		}
+		
 	- GET (BLOCK) returns a pushed MESSAGE. fileds: "type"(string, and should be defined in part Defination of MESSAGE Types), "source" "content"
+
+		{
+			"result": "success"
+		}
+
+		{
+			"data":{
+				"Source": 16,
+				"Type": "U",
+				"Content": "ROGER"
+			},
+			"result": "success"
+		}
+
+
 + /api/user/{userid}/friendlist
 	- GET returns the friend list of the user. fileds: "friendlist"(uint64[])
+
+		{
+			"data":{
+				"friendlist":[11,12]
+			},
+			"result": "success"
+		}
+
 	- POST changes the friend list of the user. fields: "behavior"(string, only "DELETE" and adding friends should be done with friendrequest) "friendlist"(uint64[])
+		
+		{
+			"result": "success"
+		}
+
 + /api/user/{userid}/friendrequest
 	- POST sends a friend request to the user (Attention, the request will be recieved through a MESSAGE). A user should also accept a friend request in requesting to be the other user's friend in this way. filed: "message"(string)
+
+		{
+			"result": "success"
+		}
+
 + /api/username/{username}
 	- GET returns the userid of the requested username. field: "userid"(uint64)
+
+		{
+			"data":{
+				"userid": "4"
+			},
+			"result": "success"
+		}
+
 + /api/usermail/{usermail}
 	- GET returns the userid of the requested usermail. field: "userid"(uint64)
+
+		{
+			"data":{
+				"userid": "4"
+			},
+			"result": "success"
+		}
+
 + /api/file/new
 	- POST upload a new file, in the way of multipart. field: "file"(multipart). Returns the file id for future use. field: "fileid"(uint64) Caution: This is not a server designed for heavy file transferring, and do not upload too big files. 
+	
+		{
+			"result": "success"
+		}
+
 	- UPDATED in 0.1.1, fileid is now hash of file, which is unique for each file.
 + /api/file/{fileid}
 	- GET returns the file, in common raw file, not a multipart.
@@ -109,6 +201,10 @@ BLOCK means that the api may not return immediately, specially used for blocking
 + description : string, a short description of the user
 
 ##Defination of MESSAGE Types
+
++ "U":UserMessage
++ "S":SystemAnnouncment
++ "F":FriendRequest
 
 ##constant table
 
