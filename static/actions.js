@@ -76,8 +76,8 @@ function actionFindIDByMail(){
 }
 
 function actionFriendRequest(){
-    var target = $("#textFriendRequest");
-    var description = $("#textFriendDescription");
+    var target = $("#textFriendRequest").val();
+    var description = $("#textFriendDescription").val();
     $.post("api/user/"+target+"/friendrequest",{message:description},function(data){
         try{
             if(data.result=="success"){
@@ -91,7 +91,7 @@ function actionFriendRequest(){
 }
 
 function actionSendMessage(){
-    var target = $("#textMessageTarget");
+    var target = $("#textMessageTarget").val();
     var description = $("#textMessageDescription");
     $.post("api/user/"+target+"/message",{message:description},function(data){
         try{
@@ -126,10 +126,10 @@ function actionUserInfo(){
 }
 
 function actionModify(){
-    var username = $("#textModifyName");
-    var usermail = $("#textModifyMail");
-    var userpassword = $("#textModifyPassword");
-    var userdescription = $("#textModifyDescription");
+    var username = $("#textModifyName").val();
+    var usermail = $("#textModifyMail").val();
+    var userpassword = $("#textModifyPassword").val();
+    var userdescription = $("#textModifyDescription").val();
     $.post("api/user/"+usernow,{password:userpassword,mail:usermail,name:username,description:userdescription},function(data){
         try{
             if(data.result=="success"){
