@@ -5,12 +5,12 @@
 $(document).ready(function(){
     $("#buttonLogin").click(actionLogin);
     $("#buttonRegister").click(actionRegister);
-    $("#buttonFindIDByName").click(actionFindIDByName);
+    $("#buttonFindIDbyName").click(actionFindIDByName);
     $("#buttonUserInfo").click(actionUserInfo);
     $("#buttonFriendList").click(actionFriendList);
     $("#buttonSendMessage").click(actionSendMessage);
     $("#buttonFriendRequest").click(actionFriendRequest);
-    $("#buttonFindIDByMail").click(actionFindIDByMail);
+    $("#buttonFindIDbyMail").click(actionFindIDByMail);
     $("#buttonModify").click(actionModify);
     $("#buttonGetMessage").click(actionGetMessage);
 });
@@ -100,7 +100,7 @@ function actionFriendRequest(){
 
 function actionSendMessage(){
     var target = $("#textMessageTarget").val();
-    var description = $("#textMessageDescription");
+    var description = $("#textMessageDescription").val();
     $.post("api/user/"+target+"/message",{message:description},function(data){
         try{
             if(data.result=="success"){
