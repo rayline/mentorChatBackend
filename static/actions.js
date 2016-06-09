@@ -60,7 +60,7 @@ function actionRegister(){
 }
 
 function actionFindIDByName(){
-    var username = $("#textFindIDByName").val();
+    var username = $("#textFindIDbyName").val();
     $.get("api/username/"+username,function(data){
         try{
             if(data.result=="success"){
@@ -73,7 +73,7 @@ function actionFindIDByName(){
 }
 
 function actionFindIDByMail(){
-    var usermail = $("#textFindIDByMail").val();
+    var usermail = $("#textFindIDbyMail").val();
     $.get("api/usermail/"+usermail,function(data){
         try{
             if(data.result=="success"){
