@@ -2,6 +2,19 @@
  * Created by rayline on 2016/6/8.
  */
 
+$(document).ready(function(){
+    $("#buttonLogin").click(actionLogin);
+    $("#buttonRegister").click(actionRegister);
+    $("#buttonFindIDByName").click(actionFindIDByName);
+    $("#buttonUserInfo").click(actionUserInfo);
+    $("#buttonFriendList").click(actionFriendList);
+    $("#buttonSendMessage").click(actionSendMessage);
+    $("#buttonFriendRequest").click(actionFriendRequest);
+    $("#buttonFindIDByMail").click(actionFindIDByMail);
+    $("#buttonModify").click(actionModify);
+    $("#buttonGetMessage").click(actionGetMessage);
+});
+
 var usernow;
 
 function log(logMsg){
@@ -21,7 +34,7 @@ function actionLogin(){
     },"json");
 }
 
-function actionRegiter(){
+function actionRegister(){
     var userpass = $("#textRegisterPassword").val();
     $.get("api/user/new",function(data){
         try{
@@ -78,9 +91,9 @@ function actionFriendRequest(){
     },"json");
 }
 
-function actionFriendRequest(){
-    var target = $("#textFriendRequest");
-    var description = $("#textFriendDescription");
+function actionSendMessage(){
+    var target = $("#textMessageTarget");
+    var description = $("#textMessageDescription");
     $.get("api/user/"+target+"/message",{message:description},function(data){
         try{
             if(data.result=="success"){
