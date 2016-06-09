@@ -6,7 +6,6 @@ import (
 )
 
 func init() {
-	beego.Router("/", &controllers.MainController{})
 	beego.Router("/api/users", &controllers.UserController{}, "get:AllUsers")
 	beego.Router("/api/user/new", &controllers.UserController{}, "get:NewUser")
 	beego.Router("/api/user/logout", &controllers.UserController{}, "get:LogoutUser")
@@ -19,4 +18,5 @@ func init() {
 	beego.Router("/api/username/:username", &controllers.UserController{}, "get:GetUserIdByName")
 	beego.Router("/api/file/new", &controllers.FileController{}, "post:NewFile")
 	beego.Router("/api/file/:fileid", &controllers.FileController{}, "get:RetrieveFile")
+	beego.Router("/", &controllers.MainController{})
 }
