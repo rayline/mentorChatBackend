@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	beego.SetStaticPath("/", "/")
 	beego.BConfig.Listen.EnableHTTPS = true
 	beego.BConfig.Listen.HTTPSCertFile = beego.AppConfig.String("HTTPSCertFile")
 	beego.BConfig.Listen.HTTPSKeyFile = beego.AppConfig.String("HTTPSKeyFile")
