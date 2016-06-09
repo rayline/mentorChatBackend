@@ -28,9 +28,11 @@ function actionLogin(){
         try{
             if(data.result=="success"){
                 usernow = userid;
+                log(userid+"登陆成功，请自行获取用户信息");
+            }else{
+                log("登陆失败"+data.error);
             }
         }catch(err){log("请求失败"+err);}
-        log(userid+"登陆成功，请自行获取用户信息");
     },"json");
 }
 
