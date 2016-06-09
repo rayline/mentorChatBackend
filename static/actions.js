@@ -153,7 +153,7 @@ function actionModify(){
 
 function actionGetMessage(){
     log("试图获取信息中");
-    $.get("api/user/"+usernow,function(data){
+    $.get("api/user/"+usernow+"/message",function(data){
     try{
         if(data.data.Type=="U"){
             log("来自"+data.data.Source+"的信息"+"</div><div>"+data.data.Content);
