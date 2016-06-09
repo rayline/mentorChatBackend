@@ -152,6 +152,7 @@ function actionModify(){
 }
 
 function actionGetMessage(){
+    log("试图获取信息中");
     $.get("api/user/"+usernow,function(data){
     try{
         if(data.data.Type=="U"){
