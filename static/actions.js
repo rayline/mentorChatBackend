@@ -129,7 +129,7 @@ function actionUserInfo(){
     $.get("api/user/"+usernow,function(data){
          try{
             if(data.result=="success"){
-                log("请求成功：用户信息为:"+data.JSON.stringify(data.data));
+                log("请求成功：用户信息为:"+JSON.stringify(data.data));
             }
          }catch(err){log("请求失败"+err);}
     },"json");
