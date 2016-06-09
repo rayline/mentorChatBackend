@@ -117,7 +117,7 @@ function actionFriendList(){
     $.get("api/user/"+usernow+"/friendlist",function(data){
         try{
             if(data.result=="success"){
-                log("请求成功：好友列表为:"+data.data.toJSON());
+                log("请求成功：好友列表为:"+JSON.stringify(data.data));
             }
         }catch(err){log("请求失败"+err);}
     },"json");
@@ -127,7 +127,7 @@ function actionUserInfo(){
     $.get("api/user/"+usernow,function(data){
          try{
             if(data.result=="success"){
-                log("请求成功：用户信息为:"+data.data.toJSON());
+                log("请求成功：用户信息为:"+data.JSON.stringify(data.data));
             }
          }catch(err){log("请求失败"+err);}
     },"json");
