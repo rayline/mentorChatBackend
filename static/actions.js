@@ -145,15 +145,15 @@ function actionModify(){
 function actionGetMessage(){
     $.get("api/user/"+usernow,function(data){
     try{
-        if(data.Type=="U"){
-            log("来自"+data.Source+"的信息"+"</div><div>"+data.Content);
+        if(data.data.Type=="U"){
+            log("来自"+data.data.Source+"的信息"+"</div><div>"+data.data.Content);
         }
-        if(data.Type=="F"){
-            log("来自"+data.Source+"的好友请求"+"</div><div>"+data.Content);
+        if(data.data.Type=="F"){
+            log("来自"+data.data.Source+"的好友请求"+"</div><div>"+data.data.Content);
         }
-        if(data.Type=="F"){
-            log("系统消息"+"</div><div>"+data.Content);
+        if(data.data.Type=="F"){
+            log("系统消息"+"</div><div>"+data.data.Content);
         }
-    }catch(err){log("请求失败"+err);}
+    }catch(err){log("并没有什么消息");}
 },"json");
 }
