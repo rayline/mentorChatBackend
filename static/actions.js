@@ -61,16 +61,24 @@ function actionFindIDByName(){
     var username = $("#textFindIDByName").val();
     $.get("api/username/"+username,function(data){
         try{
-            log("查询结果为:"+data.userid);
+            if(data.result=="success"){
+                log("查询结果为:"+data.data.userid);
+            }else{
+                log("查询失败，可能没有");
+            }
         }catch(err){log("请求失败"+err);}
     },"json");
 }
 
 function actionFindIDByMail(){
     var usermail = $("#textFindIDByMail").val();
-    $.get("api/usermail/"+username,function(data){
+    $.get("api/usermail/"+usermail,function(data){
         try{
-            log("查询结果为:"+data.userid);
+            if(data.result=="success"){
+                log("查询结果为:"+data.data.userid);
+            }else{
+                log("查询失败，可能没有");
+            }
         }catch(err){log("请求失败"+err);}
     },"json");
 }
