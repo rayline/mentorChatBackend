@@ -24,12 +24,12 @@ function log(logMsg){
 function actionLogin(){
     var userid = $("#textLoginID").val();
     var userpass = $("#textLoginPassword").val();
-    $.get("api/user/"+userid+"/login",{password:userpass},function(data){
+    $.post("api/user/"+userid+"/login",{password:userpass},function(data){
         try{
             if(data.result=="success"){
                 usernow = userid;
             }
-        }catch(err){log("请求失败");}
+        }catch(err){log("请求失败"+err);}
         log(userid+"登陆成功，请自行获取用户信息");
     },"json");
 }
@@ -44,15 +44,15 @@ function actionRegister(){
             }else{
                 log("注册失败"+data.error);
             }
-        }catch(err){log("请求失败");}
-        $.get("api/user/"+usernow,{password:userpass},function(data){
+        }catch(err){log("请求失败"+err);}
+        $.post("api/user/"+usernow,{password:userpass},function(data){
             try{
                 if(data.result=="success"){
                     log("首次修改密码成功");
                 }else{
                     log("首次修改密码失败"+data.error);
                 }
-            }catch(err){log("请求失败");}
+            }catch(err){log("请求失败"+err);}
             log(usernow+"注册成功，已经是登录状态");
         },"json");
     },"json");
@@ -63,7 +63,7 @@ function actionFindIDByName(){
     $.get("api/username/"+username,function(data){
         try{
             log("查询结果为:"+data.userid);
-        }catch(err){log("请求失败");}
+        }catch(err){log("请求失败"+err);}
     },"json");
 }
 
@@ -72,21 +72,21 @@ function actionFindIDByMail(){
     $.get("api/usermail/"+username,function(data){
         try{
             log("查询结果为:"+data.userid);
-        }catch(err){log("请求失败");}
+        }catch(err){log("请求失败"+err);}
     },"json");
 }
 
 function actionFriendRequest(){
     var target = $("#textFriendRequest");
     var description = $("#textFriendDescription");
-    $.get("api/user/"+target+"/friendrequest",{message:description},function(data){
+    $.post("api/user/"+target+"/friendrequest",{message:description},function(data){
         try{
             if(data.result=="success"){
                 log("已发送");
             }else{
                 log("请求失败"+data.error);
             }
-        }catch(err){log("请求失败");}
+        }catch(err){log("请求失败"+err);}
 
     },"json");
 }
@@ -94,14 +94,14 @@ function actionFriendRequest(){
 function actionSendMessage(){
     var target = $("#textMessageTarget");
     var description = $("#textMessageDescription");
-    $.get("api/user/"+target+"/message",{message:description},function(data){
+    $.post("api/user/"+target+"/message",{message:description},function(data){
         try{
             if(data.result=="success"){
                 log("已发送");
             }else{
                 log("请求失败"+data.error);
             }
-        }catch(err){log("请求失败");}
+        }catch(err){log("请求失败"+err);}
 
     },"json");
 }
@@ -112,7 +112,7 @@ function actionFriendList(){
             if(data.result=="success"){
                 log("请求成功：好友列表为:"+data.data.toJSON());
             }
-        }catch(err){log("请求失败");}
+        }catch(err){log("请求失败"+err);}
     },"json");
 }
 
@@ -122,7 +122,7 @@ function actionUserInfo(){
             if(data.result=="success"){
                 log("请求成功：用户信息为:"+data.data.toJSON());
             }
-         }catch(err){log("请求失败");}
+         }catch(err){log("请求失败"+err);}
     },"json");
 }
 
@@ -131,14 +131,14 @@ function actionModify(){
     var usermail = $("#textModifyMail");
     var userpassword = $("#textModifyPassword");
     var userdescription = $("#textModifyDescription");
-    $.get("api/user/"+usernow,{password:userpassword,mail:usermail,name:username,description:userdescription},function(data){
+    $.post("api/user/"+usernow,{password:userpassword,mail:usermail,name:username,description:userdescription},function(data){
         try{
             if(data.result=="success"){
                 log("修改成功");
             }else{
                 log("修改失败"+data.error);
             }
-        }catch(err){log("请求失败");}
+        }catch(err){log("请求失败"+err);}
     },"json");
 }
 
@@ -154,6 +154,6 @@ function actionGetMessage(){
         if(data.Type=="F"){
             log("系统消息"+"</div><div>"+data.Content);
         }
-    }catch(err){log("请求失败");}
+    }catch(err){log("请求失败"+err);}
 },"json");
 }
