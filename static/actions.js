@@ -40,7 +40,7 @@ function actionRegister(){
         try{
             if(data.result=="success"){
                 usernow = data.data.userid;
-                log(userid+"注册成功，已经是登录状态");
+                log(usernow+"注册成功，已经是登录状态");
             }else{
                 log("注册失败"+data.error);
             }
@@ -53,7 +53,6 @@ function actionRegister(){
                     log("首次修改密码失败"+data.error);
                 }
             }catch(err){log("请求失败"+err);}
-            log(usernow+"注册成功，已经是登录状态");
         },"json");
     },"json");
 }
